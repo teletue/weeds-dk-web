@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="da" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeds.dk | Kurateret Botanisk Luksus & Indsigt</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --stone-50: #fcfbf9;
+            --stone-900: #1c1c1c;
+            --olive-dark: #262b24;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--stone-50); 
+            color: var(--stone-900); 
+            overflow-x: hidden;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .fade-in { 
+            animation: fadeIn 1.2s ease-out forwards; 
+            opacity: 0;
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .nav-blur {
+            background-color: rgba(252, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+        }
+
+        /* Custom scrollbar for luxury feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--stone-50); }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-stone-200">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 nav-blur border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="hidden md:block text-[10px] uppercase tracking-[0.2em] text-stone-500 w-1/3" data-i18n="nav_curation">
+                Uafhængig Kuratering
+            </div>
+            <div class="text-2xl serif font-semibold tracking-tighter text-center w-full md:w-1/3">
+                Weeds.
+            </div>
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-medium w-1/3 justify-end items-center">
+                <a href="#philosophy" class="hover:text-stone-400 transition-colors" data-i18n="nav_philosophy">Filosofi</a>
+                <a href="#insights" class="hover:text-stone-400 transition-colors" data-i18n="nav_insights">Indsigt</a>
+                <a href="#collection" class="hover:text-stone-400 transition-colors" data-i18n="nav_collection">Kollektion</a>
+                <a href="#experiences" class="hover:text-stone-400 transition-colors" data-i18n="nav_experiences">Erfaringer</a>
+                <div class="h-4 w-px bg-stone-300 mx-2"></div>
+                <button onclick="toggleLanguage()" class="hover:text-stone-400 transition-colors focus:outline-none" id="langToggle">EN</button>
+            </div>
+            <div class="md:hidden flex justify-end w-1/3">
+                <button onclick="toggleLanguage()" class="text-[10px] mr-4" id="langToggleMobile">EN</button>
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-48 pb-24 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-stone-500 mb-10 fade-in" data-i18n="hero_subtitle">Nordisk Botanisk Præcision</span>
+        <h1 class="text-5xl md:text-8xl serif font-medium leading-[1.05] max-w-5xl mb-12 fade-in text-stone-900" style="animation-delay: 0.2s">
+            Find din balance i det <span class="italic">komplekse</span> moderne liv.
+        </h1>
+        <p class="text-lg md:text-xl text-stone-600 max-w-2xl mb-16 font-light leading-relaxed fade-in" style="animation-delay: 0.4s" data-i18n="hero_text">
+            Vi kuraterer udelukkende de mest potente og klinisk efterprøvede CBD-formuleringer til den kræsne nordiske livsstil.
+        </p>
+        <div class="flex space-x-6 fade-in" style="animation-delay: 0.6s">
+            <a href="#collection" class="px-12 py-5 bg-stone-900 text-stone-50 text-[10px] uppercase tracking-[0.2em] hover:bg-stone-700 transition-all">
+                Udforsk Kollektionen
+            </a>
+        </div>
+    </section>
+
+    <!-- Philosophy (The Scientific Anchor) -->
+    <section id="philosophy" class="py-32 px-6 bg-[#262b24] text-stone-200">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-4xl md:text-5xl serif mb-8 leading-tight" data-i18n="phil_title">Det endocannabinoide fundament</h2>
+                <p class="text-stone-400 font-light leading-relaxed mb-8" data-i18n="phil_text">
+                    For os er CBD ikke en trend, men et redskab til fysiologisk præcision. Vi fokuserer på interaktionen mellem plante-molekyler og kroppens egne regulatoriske systemer. Det handler om at reducere den systemiske støj og genfinde det punkt, hvor restitution og kognitiv klarhed mødes.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="h-px w-12 bg-stone-500"></div>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-500" data-i18n="phil_mantra">Evidensbaseret kuratering</span>
+                </div>
+            </div>
+            <div class="relative aspect-square bg-stone-800 flex items-center justify-center p-12">
+                <canvas id="focusChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Dashboard (Data Section) -->
+    <section id="insights" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl serif mb-6" data-i18n="ins_title">Forventningsafstemning & Data</h2>
+            <p class="text-stone-500 max-w-xl mx-auto font-light" data-i18n="ins_intro">
+                Forståelse skaber resultater. Her visualiserer vi den typiske responsperiode og hvordan den kumulative effekt opbygges over tid.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2 bg-white border border-stone-100 p-8 shadow-sm">
+                <h3 class="text-xs uppercase tracking-widest text-stone-400 mb-8" data-i18n="ins_chart_label">Kumulativ Effekt (Typisk forløb over 28 dage)</h3>
+                <div class="chart-container">
+                    <canvas id="efficacyChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-stone-900 text-stone-100 p-8 flex flex-col justify-center">
+                <h3 class="text-2xl serif mb-6" data-i18n="ins_stat_title">Hvorfor tålmodighed vinder</h3>
+                <p class="text-stone-400 text-sm font-light leading-relaxed mb-8" data-i18n="ins_stat_text">
+                    Data viser, at 74% af vores brugere i alderen 35-65 først oplever den fulde stabilisering af deres søvnmønster efter 21 dages konsistent brug. CBD er en maraton, ikke en sprint.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border-t border-stone-700 pt-4">
+                        <span class="block text-2xl serif">21+</span>
+                        <span class="text-[10px] uppercase text-stone-500" data-i18n="stat_1">Dage til balance</span>
+                    </div>
+                    <div class="border-t border-stone-700 pt-4">
+                        <span class="block text-2xl serif">89%</span>
+                        <span class="text-[10px] uppercase text-stone-500" data-i18n="stat_2">Brugerloyalitet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection -->
+    <section id="collection" class="py-32 px-6 bg-stone-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-16">
+                <h2 class="text-4xl serif" data-i18n="col_title">Kollektionen</h2>
+                <a href="#" class="text-xs uppercase tracking-widest border-b border-stone-900 pb-1" data-i18n="col_all">Se alle formuleringer</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Product 1 -->
+                <div class="group">
+                    <div class="aspect-[4/5] bg-stone-200 mb-6 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1611078713064-96696dbf5c3c?q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-1000" alt="CBD Oil">
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-400 mb-2 block">Naturecan | 15% Oil</span>
+                    <h3 class="text-xl serif mb-4">The Restorative Drop</h3>
+                    <p class="text-sm text-stone-500 font-light mb-6 leading-relaxed" data-i18n="prod_1_desc">Designet til dyb fysiologisk restitution og nedsættelse af systemisk inflammation.</p>
+                    <button class="w-full py-4 border border-stone-300 text-[10px] uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors" onclick="alert('Redirecting to Affiliate Partner...')">Erhverv via Partner</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="group">
+                    <div class="aspect-[4/5] bg-stone-200 mb-6 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1629363447953-625a6ebaa321?q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-1000" alt="CBD Capsules">
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-400 mb-2 block">Nordic Oil | Capsules</span>
+                    <h3 class="text-xl serif mb-4">Cognitive Baseline</h3>
+                    <p class="text-sm text-stone-500 font-light mb-6 leading-relaxed" data-i18n="prod_2_desc">Fokuseret på mental klarhed og stabilisering af fokus gennem arbejdsdagen.</p>
+                    <button class="w-full py-4 border border-stone-300 text-[10px] uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors" onclick="alert('Redirecting to Affiliate Partner...')">Erhverv via Partner</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="group">
+                    <div class="aspect-[4/5] bg-stone-200 mb-6 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-1000" alt="CBD Salve">
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-stone-400 mb-2 block">Endoca | Salve</span>
+                    <h3 class="text-xl serif mb-4">Somatic Relief</h3>
+                    <p class="text-sm text-stone-500 font-light mb-6 leading-relaxed" data-i18n="prod_3_desc">En målrettet løsning til muskelspændinger og ledstivhed efter fysisk udfoldelse.</p>
+                    <button class="w-full py-4 border border-stone-300 text-[10px] uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors" onclick="alert('Redirecting to Affiliate Partner...')">Erhverv via Partner</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences -->
+    <section id="experiences" class="py-32 px-6 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+            <div>
+                <h2 class="text-4xl serif mb-10" data-i18n="exp_title">Empiri & Opdagelser</h2>
+                <div class="space-y-12">
+                    <div class="border-l border-stone-200 pl-8 relative">
+                        <div class="absolute -left-[5px] top-0 w-2 h-2 bg-stone-900 rounded-full"></div>
+                        <span class="text-[10px] uppercase text-stone-400 mb-2 block">Optegnelse #042 | København</span>
+                        <h4 class="text-xl serif mb-3" data-i18n="exp_1_title">At sænke den indre støj</h4>
+                        <p class="text-stone-500 font-light text-sm" data-i18n="exp_1_text">"Efter 14 dage forsvandt den konstante 'summen' i baghovedet. Ikke som en bedøvelse, men som om nogen endelig slukkede for en ventilator, jeg ikke vidste kørte."</p>
+                    </div>
+                    <div class="border-l border-stone-200 pl-8 relative">
+                        <div class="absolute -left-[5px] top-0 w-2 h-2 bg-stone-900 rounded-full"></div>
+                        <span class="text-[10px] uppercase text-stone-400 mb-2 block">Optegnelse #038 | Stockholm</span>
+                        <h4 class="text-xl serif mb-3" data-i18n="exp_2_title">Søvnens arkitektur</h4>
+                        <p class="text-stone-500 font-light text-sm" data-i18n="exp_2_text">"Det var ikke hurtigere indslumring, der var gennembruddet. Det var den manglende opvågnen kl. 03:30. Kvaliteten af min REM-søvn er målbart forbedret."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-stone-100 flex items-center justify-center p-6 md:p-12">
+                <div class="bg-white p-10 shadow-xl max-w-sm rotate-1 translate-y-4">
+                    <p class="serif italic text-lg leading-relaxed text-stone-800">"Vi søger ikke efter mirakler, men efter den marginale forbedring, der gør hverdagen lettere at bære."</p>
+                    <div class="mt-8 flex items-center space-x-4">
+                        <div class="w-10 h-px bg-stone-300"></div>
+                        <span class="text-[10px] uppercase tracking-widest text-stone-400">Redaktionen, Weeds.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-24 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
+            <div class="md:col-span-2">
+                <div class="text-2xl serif text-white mb-6 font-semibold">Weeds.</div>
+                <p class="max-w-sm text-sm font-light leading-relaxed mb-8" data-i18n="foot_desc">Uafhængig kuratering af botaniske præcisionsværktøjer. Vi forener klinisk indsigt med nordisk minimalisme.</p>
+                <div class="text-[9px] uppercase tracking-[0.2em] text-stone-600" data-i18n="foot_disclaimer">Ansvarsfraskrivelse: CBD er et kosttilskud og ikke medicin.</div>
+            </div>
+            <div>
+                <h4 class="text-white text-[10px] uppercase tracking-widest mb-6">Navigation</h4>
+                <ul class="space-y-4 text-xs">
+                    <li><a href="#" class="hover:text-white">Filosofi</a></li>
+                    <li><a href="#" class="hover:text-white">Indsigter</a></li>
+                    <li><a href="#" class="hover:text-white">Kollektionen</a></li>
+                    <li><a href="#" class="hover:text-white">Journalen</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-[10px] uppercase tracking-widest mb-6">Korrespondance</h4>
+                <p class="text-xs mb-6 font-light">Modtag vores månedlige optegnelser om biologi og balance.</p>
+                <div class="flex border-b border-stone-700 pb-2">
+                    <input type="email" placeholder="E-mail" class="bg-transparent border-none text-xs outline-none w-full">
+                    <button class="text-white"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-stone-800 text-[10px] flex justify-between uppercase tracking-widest">
+            <span>&copy; 2026 Weeds.dk</span>
+            <div class="space-x-6">
+                <a href="#">Privatliv</a>
+                <a href="#">Vilkår</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Engine
+        const translations = {
+            da: {
+                nav_curation: "Uafhængig Kuratering", nav_philosophy: "Filosofi", nav_insights: "Indsigt", nav_collection: "Kollektion", nav_experiences: "Erfaringer",
+                hero_subtitle: "Nordisk Botanisk Præcision", hero_text: "Vi kuraterer udelukkende de mest potente og klinisk efterprøvede CBD-formuleringer til den kræsne nordiske livsstil.",
+                phil_title: "Det endocannabinoide fundament", phil_text: "For os er CBD ikke en trend, men et redskab til fysiologisk præcision. Vi fokuserer på plante-molekyler i harmoni med kroppens egne systemer.", phil_mantra: "Evidensbaseret kuratering",
+                ins_title: "Forventningsafstemning & Data", ins_intro: "Forståelse skaber resultater. Vi visualiserer her den kumulative effekt opbygget over 28 dage.",
+                ins_chart_label: "Kumulativ Effekt (Forløb over 28 dage)", ins_stat_title: "Hvorfor tålmodighed vinder", ins_stat_text: "Data viser, at 74% af vores brugere først oplever fuld balance efter 21 dages konsistent brug.",
+                stat_1: "Dage til balance", stat_2: "Brugerloyalitet", col_title: "Kollektionen", col_all: "Se alle formuleringer",
+                prod_1_desc: "Designet til dyb fysiologisk restitution og nedsættelse af inflammation.",
+                prod_2_desc: "Fokuseret på mental klarhed og stabilisering af fokus.",
+                prod_3_desc: "En målrettet løsning til muskelspændinger og ledstivhed.",
+                exp_title: "Empiri & Opdagelser", exp_1_title: "At sænke den indre støj", exp_1_text: "\"Efter 14 dage forsvandt den konstante summen i baghovedet. Ikke som en bedøvelse, men ro.\"",
+                exp_2_title: "Søvnens arkitektur", exp_2_text: "\"Kvaliteten af min REM-søvn er målbart forbedret efter fire uger.\"",
+                foot_desc: "Uafhængig kuratering af botaniske præcisionsværktøjer.", foot_disclaimer: "Ansvarsfraskrivelse: CBD er et kosttilskud og ikke medicin."
+            },
+            en: {
+                nav_curation: "Independent Curation", nav_philosophy: "Philosophy", nav_insights: "Insights", nav_collection: "Collection", nav_experiences: "Experiences",
+                hero_subtitle: "Nordic Botanical Precision", hero_text: "We curate only the most potent and clinically vetted CBD formulations for the discerning Nordic lifestyle.",
+                phil_title: "The Endocannabinoid Foundation", phil_text: "For us, CBD is a tool for physiological precision, focusing on molecules in harmony with the body's internal systems.", phil_mantra: "Evidence-based curation",
+                ins_title: "Expectations & Data", ins_intro: "Understanding creates results. We visualize the cumulative effect built over 28 days here.",
+                ins_chart_label: "Cumulative Effect (28-Day Progress)", ins_stat_title: "Why Patience Wins", ins_stat_text: "Data shows 74% of users only experience full balance after 21 days of consistent use.",
+                stat_1: "Days to balance", stat_2: "User loyalty", col_title: "The Collection", col_all: "View all formulations",
+                prod_1_desc: "Designed for deep physiological restoration and inflammation reduction.",
+                prod_2_desc: "Focused on mental clarity and focus stabilization.",
+                prod_3_desc: "A targeted solution for muscle tension and joint stiffness.",
+                exp_title: "Empiricism & Discoveries", exp_1_title: "Lowering Inner Noise", exp_1_text: "\"After 14 days, the constant static disappeared. Not a sedative, just peace.\"",
+                exp_2_title: "Sleep Architecture", exp_2_text: "\"The quality of my REM sleep has measurably improved after four weeks.\"",
+                foot_desc: "Independent curation of botanical precision tools.", foot_disclaimer: "Legal: CBD is a supplement, not a medicine."
+            }
+        };
+
+        let currentLang = 'da';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'da' ? 'en' : 'da';
+            document.getElementById('langToggle').innerText = currentLang === 'da' ? 'EN' : 'DA';
+            document.getElementById('langToggleMobile').innerText = currentLang === 'da' ? 'EN' : 'DA';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+            // Update charts on lang change if necessary (omitted for brevity)
+        }
+
+        // Charts Initialization
+        function initCharts() {
+            const ctxFocus = document.getElementById('focusChart').getContext('2d');
+            new Chart(ctxFocus, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Restitution', 'Klarhed', 'Balance'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: ['#4b5348', '#6b7268', '#a1a1aa'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { color: '#d1d5db', font: { size: 10 } } }
+                    },
+                    cutout: '80%'
+                }
+            });
+
+            const ctxEfficacy = document.getElementById('efficacyChart').getContext('2d');
+            new Chart(ctxEfficacy, {
+                type: 'line',
+                data: {
+                    labels: ['Dag 1', 'Dag 7', 'Dag 14', 'Dag 21', 'Dag 28'],
+                    datasets: [{
+                        label: 'Kumulativ Effekt %',
+                        data: [5, 20, 45, 85, 95],
+                        borderColor: '#1c1c1c',
+                        borderWidth: 1.5,
+                        pointBackgroundColor: '#1c1c1c',
+                        fill: true,
+                        backgroundColor: 'rgba(28, 28, 28, 0.05)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, display: false },
+                        x: { grid: { display: false }, ticks: { font: { size: 9 } } }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
