@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="da" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privatlivspolitik | Weeds.dk</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --stone-50: #fcfbf9;
+            --stone-900: #1c1c1c;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--stone-50); 
+            color: var(--stone-900); 
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .fade-in { 
+            animation: fadeIn 1.2s ease-out forwards; 
+            opacity: 0;
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .nav-blur {
+            background-color: rgba(252, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        
+        /* Typography specific for reading */
+        .prose p { margin-bottom: 1.5rem; }
+        .prose h2 { margin-top: 3rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="antialiased selection:bg-stone-200">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 nav-blur border-b border-stone-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="hidden md:block text-[10px] uppercase tracking-[0.2em] text-stone-500 w-1/3" data-i18n="nav_curation">
+                Uafhængig Kuratering
+            </div>
+            <div class="text-2xl serif font-semibold tracking-tighter text-center w-full md:w-1/3">
+                <a href="index.html">Weeds.</a>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-medium w-1/3 justify-end items-center">
+                <a href="index.html#philosophy" class="hover:text-stone-400 transition-colors" data-i18n="nav_philosophy">Filosofi</a>
+                <a href="index.html#collection" class="hover:text-stone-400 transition-colors" data-i18n="nav_collection">Kollektion</a>
+                <a href="index.html#experiences" class="hover:text-stone-400 transition-colors" data-i18n="nav_experiences">Erfaringer</a>
+                <div class="h-4 w-px bg-stone-300 mx-2"></div>
+                <button onclick="toggleLanguage()" class="hover:text-stone-400 transition-colors focus:outline-none" id="langToggle">EN</button>
+            </div>
+            <div class="md:hidden flex justify-end w-1/3">
+                <button onclick="toggleLanguage()" class="text-[10px] mr-4" id="langToggleMobile">EN</button>
+                <a href="index.html" class="text-stone-800"><i data-lucide="arrow-left" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Document Content -->
+    <main class="pt-48 pb-32 px-6 max-w-3xl mx-auto fade-in">
+        <div class="mb-16">
+            <span class="text-[10px] tracking-[0.3em] uppercase text-stone-500 mb-4 block" data-i18n="doc_meta">Senest opdateret: Maj 2026</span>
+            <h1 class="text-4xl md:text-5xl serif font-medium text-stone-900" data-i18n="doc_title">Privatlivspolitik</h1>
+        </div>
+
+        <div class="prose text-stone-600 font-light leading-relaxed text-sm md:text-base">
+            <p data-i18n="p_1">Hos Weeds.dk respekterer vi dit privatliv og er forpligtede til at beskytte dine personoplysninger. Dette dokument beskriver vores strenge principper for indsamling, brug og beskyttelse af dine data, når du interagerer med vores platform, i overensstemmelse med EU's Generelle Databeskyttelsesforordning (GDPR).</p>
+
+            <h2 class="text-2xl serif text-stone-900" data-i18n="h_1">1. Dataminimering og Formål</h2>
+            <p data-i18n="p_2">Vi indsamler udelukkende de data, der er strengt nødvendige for at opretholde en funktionel og optimeret oplevelse for vores besøgende. Dette kan inkludere anonymiserede analyse-data (f.eks. hvilke artikler der læses), som hjælper os med at kuratere mere relevant indhold. Vi overvåger ikke din adfærd på individniveau.</p>
+
+            <h2 class="text-2xl serif text-stone-900" data-i18n="h_2">2. Korrespondance og Nyhedsbrev</h2>
+            <p data-i18n="p_3">Hvis du vælger at indskrive dig i vores private korrespondance (nyhedsbrev), gemmer vi din e-mailadresse sikkert via vores tredjepartsudbyder. Din e-mailadresse vil udelukkende blive brugt til udsendelse af vores egne optegnelser. Vi sælger, udlejer eller distribuerer aldrig dine kontaktoplysninger til eksterne parter.</p>
+
+            <h2 class="text-2xl serif text-stone-900" data-i18n="h_3">3. Affiliate Links og Tredjeparter</h2>
+            <p data-i18n="p_4">Weeds.dk fungerer som en uafhængig kurator. Vores kollektion indeholder udgående links til verificerede tredjepartspartnere (affiliate links). Når du klikker på disse links og forlader vores domæne for at gennemføre en erhvervelse, anvender vores partnere cookies til at spore oprindelsen af trafikken. Vi har ikke adgang til dine personlige betalingsoplysninger eller købsdata hos disse tredjeparter. Vi opfordrer dig til at læse den specifikke privatlivspolitik hos den respektive partner (f.eks. Nordic Oil eller Naturecan), før du fuldfører din transaktion.</p>
+
+            <h2 class="text-2xl serif text-stone-900" data-i18n="h_4">4. Dine Rettigheder</h2>
+            <p data-i18n="p_5">I henhold til gældende lovgivning har du altid ret til indsigt i, berigtigelse af eller sletning af de personoplysninger, vi måtte have registreret om dig. Du har desuden ret til at trække dit samtykke tilbage til enhver tid (eksempelvis ved at afmelde vores korrespondance via linket i bunden af enhver e-mail).</p>
+
+            <h2 class="text-2xl serif text-stone-900" data-i18n="h_5">5. Kontakt</h2>
+            <p data-i18n="p_6">Hvis du har spørgsmål til vores håndtering af data, den tekniske infrastruktur, eller hvis du ønsker at gøre brug af dine rettigheder, er du velkommen til at rette henvendelse til redaktionen på: <a href="mailto:kontakt@weeds.dk" class="text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-colors">kontakt@weeds.dk</a>.</p>
+        </div>
+    </main>
+
+    <!-- Footer (Identical to index.html for consistency) -->
+    <footer class="bg-stone-900 text-stone-400 py-24 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
+            <div class="md:col-span-2">
+                <div class="text-2xl serif text-white mb-6 font-semibold">Weeds.</div>
+                <p class="max-w-sm text-sm font-light leading-relaxed mb-8" data-i18n="foot_desc">Uafhængig kuratering af botaniske præcisionsværktøjer. Vi forener klinisk indsigt med nordisk minimalisme.</p>
+                <div class="text-[9px] uppercase tracking-[0.2em] text-stone-600" data-i18n="foot_disclaimer">Ansvarsfraskrivelse: CBD er et kosttilskud og ikke medicin.</div>
+            </div>
+            <div>
+                <h4 class="text-white text-[10px] uppercase tracking-widest mb-6" data-i18n="foot_nav_title">Navigation</h4>
+                <ul class="space-y-4 text-xs">
+                    <li><a href="index.html#philosophy" class="hover:text-white" data-i18n="nav_philosophy">Filosofi</a></li>
+                    <li><a href="index.html#collection" class="hover:text-white" data-i18n="nav_collection">Kollektionen</a></li>
+                    <li><a href="index.html#experiences" class="hover:text-white" data-i18n="nav_experiences">Erfaringer</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-[10px] uppercase tracking-widest mb-6" data-i18n="foot_news_title">Korrespondance</h4>
+                <p class="text-xs mb-6 font-light" data-i18n="foot_news_text">Modtag vores månedlige optegnelser om biologi og balance.</p>
+                <div class="flex border-b border-stone-700 pb-2">
+                    <input type="email" placeholder="E-mail" class="bg-transparent border-none text-xs outline-none w-full" id="emailInput">
+                    <button class="text-white"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-stone-800 text-[10px] flex flex-col md:flex-row justify-between items-center uppercase tracking-widest">
+            <span class="mb-4 md:mb-0">&copy; 2026 Weeds.dk</span>
+            <div class="space-x-6">
+                <a href="privacy.html" class="hover:text-stone-200">Privatlivspolitik</a>
+                <a href="#" class="hover:text-stone-200">Handelsbetingelser</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            da: {
+                nav_curation: "Uafhængig Kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer",
+                doc_meta: "Senest opdateret: Maj 2026", doc_title: "Privatlivspolitik",
+                h_1: "1. Dataminimering og Formål", p_1: "Hos Weeds.dk respekterer vi dit privatliv og er forpligtede til at beskytte dine personoplysninger. Dette dokument beskriver vores strenge principper for indsamling, brug og beskyttelse af dine data, når du interagerer med vores platform, i overensstemmelse med EU's Generelle Databeskyttelsesforordning (GDPR).",
+                p_2: "Vi indsamler udelukkende de data, der er strengt nødvendige for at opretholde en funktionel og optimeret oplevelse for vores besøgende. Dette kan inkludere anonymiserede analyse-data (f.eks. hvilke artikler der læses), som hjælper os med at kuratere mere relevant indhold. Vi overvåger ikke din adfærd på individniveau.",
+                h_2: "2. Korrespondance og Nyhedsbrev", p_3: "Hvis du vælger at indskrive dig i vores private korrespondance (nyhedsbrev), gemmer vi din e-mailadresse sikkert via vores tredjepartsudbyder. Din e-mailadresse vil udelukkende blive brugt til udsendelse af vores egne optegnelser. Vi sælger, udlejer eller distribuerer aldrig dine kontaktoplysninger til eksterne parter.",
+                h_3: "3. Affiliate Links og Tredjeparter", p_4: "Weeds.dk fungerer som en uafhængig kurator. Vores kollektion indeholder udgående links til verificerede tredjepartspartnere (affiliate links). Når du klikker på disse links og forlader vores domæne for at gennemføre en erhvervelse, anvender vores partnere cookies til at spore oprindelsen af trafikken. Vi har ikke adgang til dine personlige betalingsoplysninger eller købsdata hos disse tredjeparter. Vi opfordrer dig til at læse den specifikke privatlivspolitik hos den respektive partner (f.eks. Nordic Oil eller Naturecan), før du fuldfører din transaktion.",
+                h_4: "4. Dine Rettigheder", p_5: "I henhold til gældende lovgivning har du altid ret til indsigt i, berigtigelse af eller sletning af de personoplysninger, vi måtte have registreret om dig. Du har desuden ret til at trække dit samtykke tilbage til enhver tid (eksempelvis ved at afmelde vores korrespondance via linket i bunden af enhver e-mail).",
+                h_5: "5. Kontakt", p_6: "Hvis du har spørgsmål til vores håndtering af data, den tekniske infrastruktur, eller hvis du ønsker at gøre brug af dine rettigheder, er du velkommen til at rette henvendelse til redaktionen på: kontakt@weeds.dk.",
+                foot_desc: "Uafhængig kuratering af botaniske præcisionsværktøjer. Vi forener klinisk indsigt med nordisk minimalisme.", foot_disclaimer: "Ansvarsfraskrivelse: CBD er et kosttilskud og ikke medicin.",
+                foot_nav_title: "Navigation", foot_news_title: "Korrespondance", foot_news_text: "Modtag vores månedlige optegnelser om biologi og balance."
+            },
+            en: {
+                nav_curation: "Independent Curation", nav_philosophy: "Philosophy", nav_collection: "Collection", nav_experiences: "Experiences",
+                doc_meta: "Last updated: May 2026", doc_title: "Privacy Policy",
+                h_1: "1. Data Minimization and Purpose", p_1: "At Weeds.dk, we respect your privacy and are committed to protecting your personal data. This document outlines our strict principles for the collection, use, and protection of your data when you interact with our platform, in accordance with the EU's General Data Protection Regulation (GDPR).",
+                p_2: "We only collect data that is strictly necessary to maintain a functional and optimized experience for our visitors. This may include anonymized analytics data (e.g., which articles are read) to help us curate more relevant content. We do not monitor your behavior on an individual level.",
+                h_2: "2. Correspondence and Newsletter", p_3: "If you choose to enroll in our private correspondence (newsletter), we store your email address securely via our third-party provider. Your email address will solely be used for dispatching our own records. We never sell, rent, or distribute your contact details to external parties.",
+                h_3: "3. Affiliate Links and Third Parties", p_4: "Weeds.dk operates as an independent curator. Our collection contains outbound links to verified third-party partners (affiliate links). When you click these links and leave our domain to complete an acquisition, our partners use cookies to track the origin of the traffic. We do not have access to your personal payment information or purchase data at these third parties. We encourage you to read the specific privacy policy of the respective partner before completing your transaction.",
+                h_4: "4. Your Rights", p_5: "Under applicable law, you always have the right to access, rectify, or delete any personal data we may hold about you. You also have the right to withdraw your consent at any time (for example, by unsubscribing from our correspondence via the link at the bottom of any email).",
+                h_5: "5. Contact", p_6: "If you have any questions regarding our data handling, technical infrastructure, or if you wish to exercise your rights, please feel free to contact the editorial team at: kontakt@weeds.dk.",
+                foot_desc: "Independent curation of botanical precision tools. We unite clinical insight with Nordic minimalism.", foot_disclaimer: "Disclaimer: CBD is a dietary supplement and not medicine.",
+                foot_nav_title: "Navigation", foot_news_title: "Correspondence", foot_news_text: "Receive our monthly records on biology and balance."
+            }
+        };
+
+        let currentLang = 'da';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'da' ? 'en' : 'da';
+            document.getElementById('langToggle').innerText = currentLang === 'da' ? 'EN' : 'DA';
+            document.getElementById('langToggleMobile').innerText = currentLang === 'da' ? 'EN' : 'DA';
+            document.getElementById('emailInput').placeholder = currentLang === 'da' ? 'E-mail' : 'Email';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
