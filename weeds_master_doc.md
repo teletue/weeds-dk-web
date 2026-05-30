@@ -1,73 +1,58 @@
 Weeds.dk - Master Dokumentation (AI Context File)
 
-Dette dokument fungerer som "hukommelsen" for projektet Weeds.dk. Det skal bruges til at give kontekst til AI-assistenter (Windsurf, Cursor, ChatGPT, Claude etc.), så udviklingen altid fortsætter i den rigtige retning, og koden forbliver ren og konsistent.
+Dette dokument fungerer som "hukommelsen" for projektet Weeds.dk. Det skal bruges til at give kontekst til fremtidige AI-assistenter (Windsurf, Cursor, ChatGPT, Claude etc.), så udviklingen altid fortsætter i den rigtige retning.
 
-AI INSTRUKTION: Læs altid dette dokument før du foreslår ændringer til koden.
+AI INSTRUKTION: Læs altid dette dokument før du foreslår ændringer til koden. Bevar tone of voice, og hold al kode i single-file strukturen (HTML/Tailwind/Vanilla JS).
 
 1. Projektets DNA
 
 Domæne: weeds.dk
 
-Koncept: En uafhængig, luksuriøs og klinisk funderet kurator af lovlige CBD-produkter via en affiliate-forretningsmodel.
+Koncept: En uafhængig, luksuriøs og klinisk funderet kurator af lovlige cannabinoider via en affiliate-forretningsmodel.
+
+Sortiment: Udviklet fra udelukkende CBD til nu at omfatte hele plantens spektrum, herunder THCa, med en forberedt infrastruktur til fremtidens THC-holdige botaniske gastronomi og drikkevarer.
 
 Målgruppe: 35-65-årige mænd og kvinder i Norden. Et modent publikum, der søger kognitiv klarhed, bedre søvn og fysiologisk restitution.
 
-Tone of Voice: Rolig, intellektuel, ærlig og kompromisløs. Vi bruger ord som "erhverv" i stedet for "køb", og vi undgår aggressiv og syntetisk wellness-markedsføring.
+Tone of Voice: Rolig, intellektuel, ærlig og kompromisløs. Vi navigerer udenom "stoner"-kultur og aggressiv wellness-marketing. Vi "erhverver" i stedet for at "købe".
 
-2. Den Tekniske Stack (Hvordan det er bygget)
+2. Den Tekniske Stack & SEO
 
-Projektet er bevidst holdt super simpelt, statisk og lynhurtigt. AI Rule: Foreslå ikke tunge frameworks som React, Next.js eller WordPress. Vi holder os til fundamentet.
+Arkitektur: Statisk Single Page Application (SPA). Bygget for maksimal hastighed og SEO-performance.
 
-Arkitektur: Statisk Single Page Application (SPA).
+Sprog/Framework: Ren HTML5, Vanilla JavaScript, Tailwind CSS (via CDN). INGEN tunge frameworks (React/Next.js).
 
-Sprog: Ren HTML, CSS og Vanilla JavaScript.
+Sprogmotor (i18n): Et custom, letvægts JavaScript-dictionary (translations-objektet) i bunden af index.html. Skifter sprog via data-i18n attributter uden reload.
 
-Styling: Tailwind CSS (hentet via CDN for nemhedens skyld).
+Dynamisk Data (RSS): Live nyheder hentes via JavaScript Fetch API, og konverteres gennem rss2json for at omgå CORS-restriktioner.
 
-Ikoner: Lucide Icons.
+SEO Principper: Semantisk HTML, mobil-først design (responsive Tailwind-klasser), hurtig load-tid, og strukturerede overskrifter (H1-H3).
 
-Sprogmotor (i18n): Et specialbygget, letvægts JavaScript-system i bunden af filerne, der gør det muligt at skifte sprog (DA/EN) uden at genindlæse siden (via data-i18n attributter).
+3. Filer og Mappestruktur
 
-Hosting: Deployes direkte fra GitHub til Vercel (Continuous Deployment).
+/index.html - Kernen. (Forside, Filosofi, Kollektion, RSS Nyheder, Erfaringer, Journal).
 
-3. SEO & Performance (Meget vigtigt)
+/privacy.html - Privatlivspolitik (GDPR).
 
-For at sikre at Weeds.dk rangerer højt på Google (SEO) og Geolocation-søgninger:
+/terms.html - [Planlagt] Handelsbetingelser.
 
-Vi bruger semantisk HTML (korrekt brug af <nav>, <section>, <article>, <h1> til <h4>).
+/assets/ - Mappen til lokalt hostede, egne AI-genererede billeder (f.eks. cbd-drops.jpg, thca-crystals.jpg). Billeder bør holdes under 300kb for performance.
 
-Alle billeder SKAL have beskrivende alt-tekster.
+4. Design & Æstetik (The Caniggma Look)
 
-Siden skal loade øjeblikkeligt. Billeder skal komprimeres, og vi undgår unødvendige eksterne scripts.
+Farver: Mutede naturfarver. Varm sten/knækket hvid (bg-[#fcfbf9]), dyb oliven (bg-[#262b24]), carbon-sort (text-[#1c1c1c]).
 
-4. Filer og Mappestruktur
+Overskrifter: Playfair Display (Serif) for det redaktionelle, print-lignende look.
 
-Lige nu holdes alt i en flad struktur for at gøre det nemt at håndtere:
+Brødtekst: Inter (Sans-serif) for absolut læsbarhed.
 
-index.html - Hovedsiden (Forside, filosofi, kollektion, erfaringer, journal).
+5. Deployment Arbejdsgang (Den Gyldne Rutine)
 
-privacy.html - Privatlivspolitik (GDPR-compliance).
+Køres i Windsurf terminalen:
 
-Planlagt: terms.html - Handelsbetingelser (kommer senere).
+git add .
 
-Planlagt: assets/ - En mappe til fremtidige lokale, optimerede billeder.
+git commit -m "Beskriv ændringen her"
 
-5. Design & Æstetik (The Caniggma Look)
-
-Designet skal føles mørkt, eksklusivt, klinisk rent og med masser af luft (whitespace).
-
-Farvepalette: Mutede naturfarver. Varm sten/knækket hvid (bg-[#fcfbf9]), dyb oliven (bg-[#262b24]), og carbon-sort (text-[#1c1c1c]).
-
-Typografi (Overskrifter): Playfair Display (Serif) - Giver det klassiske, redaktionelle magasin-look.
-
-Typografi (Brødtekst): Inter (Sans-serif) - Sikrer perfekt læsbarhed på moderne skærme.
-
-6. Deployment Arbejdsgang (Den Gyldne Rutine)
-
-For at opdatere live-siden på weeds.dk, udføres følgende 3 trin i Windsurf terminalen:
-
-git add . (Gør alle ændringer klar)
-
-git commit -m "Kort og præcis beskrivelse af ændringen" (Gemmer ændringen lokalt)
-
-git push (Sender ændringen til GitHub, hvorefter Vercel automatisk opdaterer siden online).
+git push
+(Trigger automatisk et live-build på Vercel).

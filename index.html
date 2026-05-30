@@ -17,21 +17,10 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #fcfbf9; 
-      color: #1c1c1c; 
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #fcfbf9; color: #1c1c1c; }
+    h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
     
-    h1, h2, h3, h4, .serif { 
-      font-family: 'Playfair Display', serif; 
-    }
-    
-    .fade-in { 
-      animation: fadeIn 1.5s ease-out forwards; 
-      opacity: 0;
-    }
-    
+    .fade-in { animation: fadeIn 1.5s ease-out forwards; opacity: 0; }
     .delay-1 { animation-delay: 0.3s; }
     .delay-2 { animation-delay: 0.6s; }
     
@@ -41,10 +30,11 @@
     }
     
     .bg-dark-olive { background-color: #262b24; }
+    img { transition: opacity 0.5s ease-in-out; }
     
-    img {
-      transition: opacity 0.5s ease-in-out;
-    }
+    /* Nyheds-kort hover effekt */
+    .news-card { transition: all 0.4s ease; }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
   </style>
 </head>
 <body class="antialiased selection:bg-stone-300 selection:text-stone-900">
@@ -62,7 +52,7 @@
         <a href="#philosophy" class="hover:text-stone-500 transition-colors" data-i18n="nav_philosophy">Filosofi</a>
         <a href="#collection" class="hover:text-stone-500 transition-colors" data-i18n="nav_collection">Kollektion</a>
         <a href="#experiences" class="hover:text-stone-500 transition-colors" data-i18n="nav_experiences">Erfaringer</a>
-        <a href="#journal" class="hover:text-stone-500 transition-colors" data-i18n="nav_context">Kontekst</a>
+        <a href="#news" class="hover:text-stone-500 transition-colors" data-i18n="nav_news">Udvikling</a>
         <div class="h-4 w-px bg-stone-300 mx-2"></div>
         <button onclick="toggleLanguage()" class="hover:text-stone-500 transition-colors focus:outline-none" id="langToggle">EN</button>
       </div>
@@ -97,7 +87,7 @@
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-5xl serif mb-10 font-normal" data-i18n="phil_title">Naturens intellekt</h2>
       <p class="text-lg md:text-xl text-stone-300 font-light leading-relaxed mb-12 text-left md:text-center" data-i18n="phil_text">
-        For det tænkende menneske er velvære ikke længere en overfladisk trend; det er en fortløbende, seriøs dialog mellem krop og sind. Når vi navigerer i livets og karrierens kompleksitet, udvikler vores fysiologiske behov sig. Vi betragter hele plantens spektrum – ikke kun isolerede molekyler. Vi fungerer som dit stringente filter og vurderer uafhængigt europæiske producenter for at sikre, at de ekstrakter du byder din krop, er af absolut særklasse.
+        For det tænkende menneske er velvære ikke længere en overfladisk trend; det er en fortløbende, seriøs dialog mellem krop og sind. Vi betragter hele plantens spektrum – ikke kun isolerede molekyler. Vi fungerer som dit stringente filter og vurderer uafhængigt europæiske producenter for at sikre, at de ekstrakter du byder din krop, er af absolut særklasse.
       </p>
       <div class="flex items-center justify-center space-x-4">
         <div class="h-px w-8 bg-stone-500"></div>
@@ -113,7 +103,7 @@
       <div class="max-w-2xl">
         <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="col_title">Den kuraterede kollektion</h2>
         <p class="text-stone-500 font-light leading-relaxed text-sm md:text-base" data-i18n="col_text">
-          Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model, hvor vi modtager kommission ved køb gennem vores verificerede kanaler. Fra grundlæggende CBD til avancerede THCa-profiler.
+          Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model. Fra grundlæggende CBD til avancerede THCa-profiler.
         </p>
       </div>
     </div>
@@ -123,7 +113,8 @@
       <!-- Partner Product 1 (CBD) -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1611078713064-96696dbf5c3c?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Full Spectrum CBD Oil Drop">
+            <!-- OPKALD TIL LOKAL ASSET: Sørg for at billedet i mappen hedder 'cbd-drops.jpg' -->
+            <img src="assets/cbd-drops.jpg" onerror="this.src='https://images.unsplash.com/photo-1611078713064-96696dbf5c3c?q=80&w=1000&auto=format&fit=crop'" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Full Spectrum CBD Oil Drop">
         </div>
         <div class="flex-grow">
             <div class="text-[10px] uppercase tracking-widest text-stone-500 mb-3 flex items-center justify-between">
@@ -140,7 +131,7 @@
         </button>
       </div>
 
-      <!-- Partner Product 2 (CBD Sleep) -->
+      <!-- Partner Product 2 (CBD Sleep - Unsplash Placeholder indtil videre) -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
             <img src="https://images.unsplash.com/photo-1629363447953-625a6ebaa321?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Restorative Sleep Complex">
@@ -163,7 +154,8 @@
       <!-- Partner Product 3 (THCa) -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
-             <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="THCa Extract">
+             <!-- OPKALD TIL LOKAL ASSET: Sørg for at billedet i mappen hedder 'thca-crystals.jpg' -->
+             <img src="assets/thca-crystals.jpg" onerror="this.src='https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop'" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="THCa Extract">
         </div>
         <div class="flex-grow">
             <div class="text-[10px] uppercase tracking-widest text-stone-500 mb-3 flex items-center justify-between">
@@ -172,7 +164,7 @@
             </div>
             <h3 class="text-2xl serif mb-3 text-stone-900" data-i18n="prod_title_3">Krystallinsk THCa Ekstrakt</h3>
             <p class="text-stone-600 text-sm font-light mb-8 leading-relaxed" data-i18n="prod_desc_3">
-              Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet avancerede fysiologiske behov og dyb afspænding.
+              Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.
             </p>
         </div>
         <button class="w-full py-4 border border-stone-300 text-stone-900 text-xs uppercase tracking-widest hover:bg-stone-900 hover:text-[#fcfbf9] transition-colors duration-300" onclick="alert('Redirect til partner')" data-i18n="btn_acquire">
@@ -183,61 +175,56 @@
     </div>
   </section>
 
-  <!-- Future of Botany Teaser (Edibles/Beverages) -->
-  <section class="py-16 md:py-20 px-6 bg-stone-900 text-stone-200 text-center mx-auto max-w-7xl mb-24 md:mb-32">
-    <div class="max-w-3xl mx-auto">
-      <span class="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-4 block" data-i18n="fut_label">I Horisonten</span>
-      <h2 class="text-3xl md:text-4xl serif mb-6" data-i18n="fut_title">Botanisk Gastronomi & Drikkevarer</h2>
-      <p class="font-light text-stone-400 leading-relaxed mb-8 text-sm md:text-base" data-i18n="fut_text">
-        I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer og spiselige formuleringer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse og rekreation.
-      </p>
-      <div class="w-16 h-px bg-stone-600 mx-auto"></div>
+  <!-- Future of Botany Teaser (Gastronomi med lokal asset) -->
+  <section class="py-0 px-6 max-w-7xl mx-auto mb-24 md:mb-32">
+    <div class="relative w-full overflow-hidden bg-stone-900 text-stone-200 flex flex-col md:flex-row items-center">
+      <div class="w-full md:w-1/2 p-12 md:p-20 z-10 text-center md:text-left">
+        <span class="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-4 block" data-i18n="fut_label">I Horisonten</span>
+        <h2 class="text-3xl md:text-4xl serif mb-6" data-i18n="fut_title">Botanisk Gastronomi & Drikkevarer</h2>
+        <p class="font-light text-stone-400 leading-relaxed mb-8 text-sm md:text-base" data-i18n="fut_text">
+          I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.
+        </p>
+        <div class="w-16 h-px bg-stone-600 mx-auto md:mx-0"></div>
+      </div>
+      <div class="w-full md:w-1/2 h-64 md:h-[500px] relative">
+        <!-- OPKALD TIL LOKAL ASSET: Sørg for at billedet i mappen hedder 'gastronomy.jpg' -->
+        <img src="assets/gastronomy.jpg" onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop'" class="w-full h-full object-cover absolute inset-0 opacity-80" alt="Botanical Cocktail">
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-transparent to-stone-900/90"></div>
+      </div>
     </div>
   </section>
 
   <!-- Experiences / Empirical Discoveries -->
   <section id="experiences" class="py-24 md:py-32 px-6 bg-[#fcfbf9] border-t border-stone-200">
     <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row justify-between items-end mb-16">
-        <div class="max-w-2xl">
-          <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="exp_title">Empiri & Opdagelser</h2>
-          <p class="text-stone-600 font-light leading-relaxed text-sm md:text-base" data-i18n="exp_intro">
-            Vi insisterer på at koble den kliniske litteratur med den levede erfaring. Her deler vi vores egne optegnelser om dosering af forskellige cannabinoider, kropslig respons og den langsomme kalibrering af hverdagen.
-          </p>
-        </div>
-      </div>
-
+      <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="exp_title">Empiri & Opdagelser</h2>
+      <p class="text-stone-600 font-light leading-relaxed max-w-2xl mb-16" data-i18n="exp_intro">
+        Vi insisterer på at koble den kliniske litteratur med den levede erfaring.
+      </p>
+      
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-        <!-- Experience 1 -->
         <article class="group cursor-pointer">
-          <div class="overflow-hidden mb-6 bg-stone-200 aspect-video relative">
-            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Journaling">
-          </div>
           <div class="text-[10px] uppercase tracking-widest text-stone-500 mb-4 flex items-center space-x-4">
             <span data-i18n="exp_tag_1">Kognition</span>
             <span class="w-8 h-px bg-stone-300"></span>
             <span>Marts 2026</span>
           </div>
           <h3 class="text-2xl serif mb-4 text-stone-900 group-hover:text-stone-600 transition-colors" data-i18n="exp_post_1_title">At sænke den indre støj</h3>
-          <p class="text-stone-600 font-light leading-relaxed text-sm mb-6" data-i18n="exp_post_1_excerpt">
-            En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration under komplekst strategiarbejde. Det handlede ikke om at blive afslappet, men om at fjerne statisk støj.
+          <p class="text-stone-600 font-light text-sm mb-6" data-i18n="exp_post_1_excerpt">
+            En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration.
           </p>
           <span class="text-xs tracking-widest uppercase border-b border-stone-900 pb-1 text-stone-900" data-i18n="exp_read_more">Læs optegnelse</span>
         </article>
 
-        <!-- Experience 2 -->
         <article class="group cursor-pointer">
-          <div class="overflow-hidden mb-6 bg-stone-200 aspect-video relative">
-            <img src="https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover filter grayscale opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Resting">
-          </div>
           <div class="text-[10px] uppercase tracking-widest text-stone-500 mb-4 flex items-center space-x-4">
             <span data-i18n="exp_tag_2">Fysiologi</span>
             <span class="w-8 h-px bg-stone-300"></span>
             <span>Februar 2026</span>
           </div>
           <h3 class="text-2xl serif mb-4 text-stone-900 group-hover:text-stone-600 transition-colors" data-i18n="exp_post_2_title">Spektrum og Synergi</h3>
-          <p class="text-stone-600 font-light leading-relaxed text-sm mb-6" data-i18n="exp_post_2_excerpt">
-            Mine observationer af "Entourage-effekten" – hvordan overgangen fra isolat til en profil med et bredt spektrum af cannabinoider skabte en langt mere mærkbar og vedvarende fysiologisk base.
+          <p class="text-stone-600 font-light text-sm mb-6" data-i18n="exp_post_2_excerpt">
+            Mine observationer af "Entourage-effekten" og overgangen fra isolat til fuldspektrum.
           </p>
           <span class="text-xs tracking-widest uppercase border-b border-stone-900 pb-1 text-stone-900" data-i18n="exp_read_more">Læs optegnelse</span>
         </article>
@@ -245,25 +232,25 @@
     </div>
   </section>
 
-  <!-- Context / Journal -->
-  <section id="journal" class="py-24 md:py-32 px-6 bg-stone-100">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
-      <div class="md:w-1/2 w-full">
-        <img src="https://images.unsplash.com/photo-1499914485622-a88fac536970?q=80&w=2500&auto=format&fit=crop" class="w-full h-[500px] object-cover filter grayscale opacity-90" alt="Intellectual Context">
+  <!-- RSS News Section (Industriens Udvikling) -->
+  <section id="news" class="py-24 md:py-32 px-6 bg-stone-100 border-t border-stone-200">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+        <div class="max-w-2xl">
+          <div class="text-[10px] uppercase tracking-[0.2em] text-stone-500 mb-4" data-i18n="news_label">Global Indsigt</div>
+          <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="news_title">Industriens Udvikling</h2>
+          <p class="text-stone-600 font-light leading-relaxed text-sm md:text-base" data-i18n="news_intro">
+            Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.
+          </p>
+        </div>
       </div>
-      <div class="md:w-1/2 w-full">
-        <div class="text-xs tracking-widest uppercase text-stone-500 mb-6" data-i18n="jour_label">Journalen</div>
-        <h2 class="text-4xl serif mb-8 text-stone-900" data-i18n="jour_title">Bag om molekylet</h2>
-        <p class="text-stone-600 font-light mb-6 leading-relaxed" data-i18n="jour_text_1">
-          Den offentlige samtale om cannabinoider mangler ofte den nødvendige dybde. Vi betragter ikke disse forbindelser som universalmidler, men derimod som potente værktøjer til at modulere det endocannabinoide system – et netværk dybt involveret i håndtering af systemisk stress, inflammation og hvile.
-        </p>
-        <p class="text-stone-600 font-light mb-10 leading-relaxed" data-i18n="jour_text_2">
-          I vores journal pakker vi den kliniske litteratur ud, fjerner den syntetiske markedsføring og tilbyder et modent, horisontalt perspektiv på integrationen af CBD, THCa og fremtidige botaniske profiler i en krævende livsstil.
-        </p>
-        <a href="#" class="inline-flex items-center space-x-3 text-xs tracking-widest uppercase border-b border-stone-900 pb-1 text-stone-900 hover:text-stone-500 hover:border-stone-500 transition-colors">
-          <span data-i18n="jour_link">Læs den seneste korrespondance</span>
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </a>
+
+      <!-- Container til RSS Feed -->
+      <div id="rss-feed-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Loader mens den henter -->
+        <div class="col-span-3 text-center py-10 text-stone-500 text-sm font-light uppercase tracking-widest animate-pulse" id="rss-loader" data-i18n="news_loading">
+          Henter seneste journaler...
+        </div>
       </div>
     </div>
   </section>
@@ -275,10 +262,7 @@
       <div class="col-span-1 md:col-span-5">
         <div class="text-2xl serif text-stone-200 mb-6 font-semibold">Weeds.</div>
         <p class="max-w-sm mb-8 leading-relaxed" data-i18n="foot_desc">
-          Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum. En nuanceret, kompromisløs tilgang til moderne vitalitet og somatisk balance.
-        </p>
-        <p class="text-[10px] text-stone-500 leading-relaxed max-w-sm" data-i18n="foot_legal">
-          Juridisk ansvarsfraskrivelse: Vi opererer som en uafhængig affiliate-enhed. Produkterne kurateret på denne platform sælges og håndteres af verificerede tredjepartspartnere. Plantebaserede ekstrakter er ikke beregnet til at diagnosticere eller behandle sygdomme.
+          Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum.
         </p>
       </div>
       
@@ -286,96 +270,134 @@
         <h4 class="text-stone-200 uppercase tracking-widest text-xs mb-6" data-i18n="foot_nav_title">Udforskning</h4>
         <ul class="space-y-4">
           <li><a href="#philosophy" class="hover:text-stone-200 transition-colors" data-i18n="foot_nav_1">Vores filosofi</a></li>
-          <li><a href="#collection" class="hover:text-stone-200 transition-colors" data-i18n="foot_nav_2">Den kuraterede kollektion</a></li>
-          <li><a href="#journal" class="hover:text-stone-200 transition-colors" data-i18n="foot_nav_3">Kontekst & journal</a></li>
-          <li><a href="#" class="hover:text-stone-200 transition-colors" data-i18n="foot_nav_4">Partnerstandarder</a></li>
+          <li><a href="#collection" class="hover:text-stone-200 transition-colors" data-i18n="foot_nav_2">Kollektionen</a></li>
+          <li><a href="#news" class="hover:text-stone-200 transition-colors" data-i18n="nav_news">Udvikling</a></li>
         </ul>
       </div>
       
       <div class="col-span-1 md:col-span-3">
         <h4 class="text-stone-200 uppercase tracking-widest text-xs mb-6" data-i18n="foot_news_title">Dialog</h4>
-        <p class="mb-6 leading-relaxed" data-i18n="foot_news_text">Bliv en del af vores private korrespondance for at få dybdegående indsigter i botanisk velvære og lang levetid.</p>
-        <form class="flex border-b border-stone-600 pb-2 focus-within:border-stone-300 transition-colors">
-          <input type="email" placeholder="Din e-mailadresse" class="bg-transparent outline-none w-full text-stone-200 placeholder-stone-600 text-sm" id="emailInput">
-          <button type="button" class="uppercase tracking-widest text-xs text-stone-200 hover:text-white transition-colors" data-i18n="foot_news_btn">Tilmeld</button>
+        <form class="flex border-b border-stone-600 pb-2">
+          <input type="email" placeholder="Din e-mailadresse" class="bg-transparent outline-none w-full text-stone-200 text-sm" id="emailInput">
+          <button type="button" class="uppercase tracking-widest text-xs text-stone-200" data-i18n="foot_news_btn">Tilmeld</button>
         </form>
       </div>
 
     </div>
-    
-    <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-800 flex flex-col md:flex-row justify-between items-center text-xs text-stone-600">
-      <p>&copy; 2026 Weeds.dk. All rights reserved.</p>
-      <div class="space-x-6 mt-4 md:mt-0">
-        <a href="terms.html" class="hover:text-stone-400" data-i18n="foot_terms">Handelsbetingelser</a>
+    <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-stone-800 flex justify-between text-xs text-stone-600">
+      <p>&copy; 2026 Weeds.dk.</p>
+      <div class="space-x-6">
         <a href="privacy.html" class="hover:text-stone-400" data-i18n="foot_privacy">Privatlivspolitik</a>
       </div>
     </div>
   </footer>
 
-  <!-- Translation & Icons Script -->
+  <!-- Scripts: Translation, Icons & RSS Feed Logic -->
   <script>
+    // --- RSS FEED LOGIC ---
+    // Bruger rss2json.com api til at omgå CORS og formatere XML til JSON
+    const rssFeedUrl = 'https://mjbizdaily.com/feed/'; // Professionel engelsk nyhedskilde
+    const rssApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+
+    async function fetchRSSNews() {
+      const container = document.getElementById('rss-feed-container');
+      const loader = document.getElementById('rss-loader');
+      
+      try {
+        const response = await fetch(rssApiUrl);
+        const data = await response.json();
+        
+        if (data.status === 'ok') {
+          loader.style.display = 'none';
+          // Vis kun de 3 nyeste artikler
+          const articles = data.items.slice(0, 3);
+          
+          articles.forEach(article => {
+            // Formater dato (simpelt)
+            const dateObj = new Date(article.pubDate);
+            const dateString = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'short', year: 'numeric' });
+            
+            // Lav kortet
+            const articleEl = document.createElement('a');
+            articleEl.href = article.link;
+            articleEl.target = '_blank';
+            articleEl.rel = 'noopener noreferrer';
+            articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
+            
+            articleEl.innerHTML = `
+              <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4">${dateString}</div>
+              <h3 class="text-xl serif text-stone-900 mb-4 leading-snug">${article.title}</h3>
+              <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
+                <span class="read-more-text" data-da="Læs original artikel" data-en="Read original article">${currentLang === 'da' ? 'Læs original artikel' : 'Read original article'}</span>
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </div>
+            `;
+            container.appendChild(articleEl);
+          });
+          // Gen-initialiser ikoner for det nye indhold
+          lucide.createIcons();
+        } else {
+          loader.innerText = 'Nyhedsstrøm midlertidigt utilgængelig.';
+        }
+      } catch (error) {
+        console.error('Fejl ved indlæsning af RSS:', error);
+        loader.innerText = 'Kunne ikke forbinde til nyhedsserver.';
+      }
+    }
+
+    // --- TRANSLATION LOGIC ---
     const translations = {
       en: {
-        nav_curation: "Independent Curation", nav_philosophy: "Philosophy", nav_collection: "Collection", nav_experiences: "Experiences", nav_context: "Context",
+        nav_curation: "Independent Curation", nav_philosophy: "Philosophy", nav_collection: "Collection", nav_experiences: "Experiences", nav_news: "Evolution",
         hero_subtitle: "A New Paradigm in Nordic Wellbeing",
         hero_title: "Recalibrate your baseline with uncompromising botanical purity.",
         hero_text: "We traverse the noise of the wellness industry to present a highly curated portfolio of cannabinoid profiles – from balancing CBD to potent THCa – designed specifically for the nuanced demands of modern life.",
         hero_cta: "Explore the Selection",
         phil_title: "The Intellect of Nature",
-        phil_text: "For the discerning individual, wellness is an ongoing, serious dialogue between mind and body. We consider the full spectrum of the plant—not just isolated molecules. We act as your rigorous filter, independently vetting European producers to ensure the extracts you introduce to your system are nothing short of exceptional.",
+        phil_text: "For the discerning individual, wellness is a serious dialogue between mind and body. We consider the full spectrum of the plant. We independently vet European producers to ensure the extracts are of absolute distinction.",
         phil_mantra: "Context over hype. Efficacy over marketing.",
         col_title: "The Curated Selection",
-        col_text: "Our meticulously selected partner products. We operate on a transparent affiliate model, earning a commission on acquisitions made through our vetted channels. From baseline CBD to advanced THCa profiles.",
-        prod_type_1: "Full Spectrum CBD", prod_title_1: "The Baseline Drops (15%)", prod_desc_1: "A robust, organic hemp extract designed for daily physiological equilibrium. Ideal for establishing a consistent internal baseline.",
-        prod_type_2: "Broad Spectrum CBD", prod_title_2: "Restorative Sleep Complex", prod_desc_2: "Formulated without THC and infused with vital botanical extracts to support deep, uninterrupted sleep architecture.",
-        prod_type_3: "THCa Formulation", prod_title_3: "Crystalline THCa Extract", prod_desc_3: "The unadulterated, acidic precursor to THC. A powerful molecule in its raw, thermally inactive form, curated for advanced physiological needs.",
+        col_text: "Our selected partner products. We operate on a transparent affiliate model. From baseline CBD to advanced THCa profiles.",
+        prod_type_1: "Full Spectrum CBD", prod_title_1: "The Baseline Drops (15%)", prod_desc_1: "A robust, organic hemp extract designed for daily physiological equilibrium.",
+        prod_type_2: "Broad Spectrum CBD", prod_title_2: "Restorative Sleep Complex", prod_desc_2: "Formulated without THC to support deep, uninterrupted sleep architecture.",
+        prod_type_3: "THCa Formulation", prod_title_3: "Crystalline THCa Extract", prod_desc_3: "The unadulterated precursor to THC. A powerful molecule in its raw form.",
         btn_acquire: "Acquire via Partner",
-        fut_label: "On the Horizon", fut_title: "Botanical Gastronomy & Beverages", fut_text: "As the European landscape matures, we are preparing the next chapter: An exclusive collection of micro-dosed, THC-infused beverages and edible formulations. A sophisticated, alcohol-free alternative for controlled recreation.",
-        exp_title: "Empiricism & Discoveries",
-        exp_intro: "We insist on coupling clinical literature with lived experience. Here we share our own records on dosing various cannabinoids, somatic response, and the slow calibration of everyday life.",
-        exp_tag_1: "Cognition", exp_post_1_title: "Lowering the internal static", exp_post_1_excerpt: "An investigation into how precision dosing altered my capacity for deep concentration during complex strategy work. It wasn't about becoming relaxed, but about removing static noise.",
-        exp_tag_2: "Physiology", exp_post_2_title: "Spectrum and Synergy", exp_post_2_excerpt: "My observations of the 'Entourage Effect' – how shifting from an isolate to a profile with a broad spectrum of cannabinoids created a much more noticeable physiological base.",
+        fut_label: "On the Horizon", fut_title: "Botanical Gastronomy & Beverages", fut_text: "We are preparing the next chapter: An exclusive collection of micro-dosed, THC-infused beverages. A sophisticated, alcohol-free alternative.",
+        exp_title: "Empiricism & Discoveries", exp_intro: "Coupling clinical literature with lived experience.",
+        exp_tag_1: "Cognition", exp_post_1_title: "Lowering internal static", exp_post_1_excerpt: "Precision dosing and deep concentration.",
+        exp_tag_2: "Physiology", exp_post_2_title: "Spectrum Synergy", exp_post_2_excerpt: "Observations of the Entourage effect.",
         exp_read_more: "Read record",
-        jour_label: "The Journal", jour_title: "Beyond the Molecule",
-        jour_text_1: "The public conversation around cannabinoids often lacks necessary depth. We view these compounds as potent tools for modulating the endocannabinoid system—deeply involved in handling systemic stress and rest.",
-        jour_text_2: "In our journal, we unpack clinical literature and offer a mature perspective on integrating CBD, THCa, and future botanical profiles into a demanding lifestyle.",
-        jour_link: "Read the latest correspondence",
-        foot_desc: "Curators of premium, legal botanical formulations for the discerning Nordic demographic. A nuanced, uncompromising approach to modern vitality and somatic balance.",
-        foot_legal: "Legal Disclaimer: We operate as an independent affiliate entity. Curated products are sold by third-party partners. Plant extracts are not intended to diagnose or treat diseases.",
-        foot_nav_title: "Exploration", foot_nav_1: "Our Philosophy", foot_nav_2: "The Curated Selection", foot_nav_3: "Context & Journal", foot_nav_4: "Partnership Standards",
-        foot_news_title: "Dialogue", foot_news_text: "Join our private correspondence for profound insights into botanical wellness and longevity.", foot_news_btn: "Join",
-        foot_terms: "Terms of Service", foot_privacy: "Privacy Policy"
+        news_label: "Global Insight", news_title: "Industry Evolution", news_intro: "Legislation and science move rapidly. We monitor the most important international currents and clinical breakthroughs in cannabinoid research.",
+        news_loading: "Retrieving latest journals...",
+        foot_desc: "Curators of premium botanical formulations for the Nordic demographic.",
+        foot_nav_title: "Exploration", foot_nav_1: "Philosophy", foot_nav_2: "Collection",
+        foot_news_title: "Dialogue", foot_news_btn: "Join", foot_privacy: "Privacy Policy"
       },
       da: {
-        nav_curation: "Uafhængig Kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer", nav_context: "Kontekst",
+        nav_curation: "Uafhængig Kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer", nav_news: "Udvikling",
         hero_subtitle: "Et nyt paradigme inden for nordisk velvære",
         hero_title: "Kalibrer dit fundament med kompromisløs botanisk renhed.",
         hero_text: "Vi navigerer gennem støjen i wellness-industrien for at præsentere en skarpt kurateret portefølje af cannabinoid-profiler – fra balancerende CBD til potent THCa – skabt specifikt til det moderne livs nuancerede krav.",
         hero_cta: "Udforsk udvalget",
         phil_title: "Naturens intellekt",
-        phil_text: "For det tænkende menneske er velvære en fortløbende, seriøs dialog mellem krop og sind. Når vi navigerer i livets og karrierens kompleksitet, udvikler vores fysiologiske behov sig. Vi betragter hele plantens spektrum – ikke kun isolerede molekyler. Vi fungerer som dit stringente filter og vurderer uafhængigt europæiske producenter for at sikre, at de ekstrakter du byder din krop, er af absolut særklasse.",
+        phil_text: "For det tænkende menneske er velvære ikke længere en overfladisk trend; det er en fortløbende, seriøs dialog mellem krop og sind. Vi betragter hele plantens spektrum – ikke kun isolerede molekyler. Vi fungerer som dit stringente filter og vurderer uafhængigt europæiske producenter for at sikre, at de ekstrakter du byder din krop, er af absolut særklasse.",
         phil_mantra: "Kontekst over hype. Effekt over markedsføring.",
         col_title: "Den kuraterede kollektion",
-        col_text: "Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model, hvor vi modtager kommission ved køb gennem vores verificerede kanaler. Fra grundlæggende CBD til avancerede THCa-profiler.",
+        col_text: "Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model. Fra grundlæggende CBD til avancerede THCa-profiler.",
         prod_type_1: "Fuldspektrum CBD", prod_title_1: "Fundament-dråberne (15%)", prod_desc_1: "Et robust, økologisk hampekstrakt designet til daglig fysiologisk ligevægt. Ideelt til at etablere et konsistent indre fundament.",
         prod_type_2: "Bredspektrum CBD", prod_title_2: "Restorativt søvnkompleks", prod_desc_2: "Formuleret uden THC og beriget med vitale botaniske ekstrakter for at understøtte den dybe, ubrudte søvnarkitektur.",
-        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa Ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet avancerede fysiologiske behov og dyb afspænding.",
+        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa Ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.",
         btn_acquire: "Erhverv via partner",
-        fut_label: "I Horisonten", fut_title: "Botanisk Gastronomi & Drikkevarer", fut_text: "I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer og spiselige formuleringer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse og rekreation.",
-        exp_title: "Empiri & Opdagelser",
-        exp_intro: "Vi insisterer på at koble den kliniske litteratur med den levede erfaring. Her deler vi vores egne optegnelser om dosering af forskellige cannabinoider, kropslig respons og den langsomme kalibrering af hverdagen.",
-        exp_tag_1: "Kognition", exp_post_1_title: "At sænke den indre støj", exp_post_1_excerpt: "En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration under komplekst strategiarbejde. Det handlede ikke om at blive afslappet, men om at fjerne statisk støj.",
-        exp_tag_2: "Fysiologi", exp_post_2_title: "Spektrum og Synergi", exp_post_2_excerpt: "Mine observationer af 'Entourage-effekten' – hvordan overgangen fra isolat til en profil med et bredt spektrum af cannabinoider skabte en langt mere mærkbar og vedvarende fysiologisk base.",
+        fut_label: "I Horisonten", fut_title: "Botanisk Gastronomi & Drikkevarer", fut_text: "I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.",
+        exp_title: "Empiri & Opdagelser", exp_intro: "Vi insisterer på at koble den kliniske litteratur med den levede erfaring.",
+        exp_tag_1: "Kognition", exp_post_1_title: "At sænke den indre støj", exp_post_1_excerpt: "En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration.",
+        exp_tag_2: "Fysiologi", exp_post_2_title: "Spektrum og Synergi", exp_post_2_excerpt: "Mine observationer af 'Entourage-effekten' og overgangen fra isolat til fuldspektrum.",
         exp_read_more: "Læs optegnelse",
-        jour_label: "Journalen", jour_title: "Bag om molekylet",
-        jour_text_1: "Den offentlige samtale om cannabinoider mangler ofte den nødvendige dybde. Vi betragter ikke disse forbindelser som universalmidler, men derimod som potente værktøjer til at modulere det endocannabinoide system – et netværk dybt involveret i håndtering af systemisk stress, inflammation og hvile.",
-        jour_text_2: "I vores journal pakker vi den kliniske litteratur ud, fjerner den syntetiske markedsføring og tilbyder et modent, horisontalt perspektiv på integrationen af CBD, THCa og fremtidige botaniske profiler i en krævende livsstil.",
-        jour_link: "Læs den seneste korrespondance",
-        foot_desc: "Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum. En nuanceret, kompromisløs tilgang til moderne vitalitet og somatisk balance.",
-        foot_legal: "Juridisk ansvarsfraskrivelse: Vi opererer som en uafhængig affiliate-enhed. Produkterne kurateret på denne platform sælges og håndteres af verificerede tredjepartspartnere. Plantebaserede ekstrakter er ikke beregnet til at diagnosticere eller behandle sygdomme.",
-        foot_nav_title: "Udforskning", foot_nav_1: "Vores filosofi", foot_nav_2: "Den kuraterede kollektion", foot_nav_3: "Kontekst & journal", foot_nav_4: "Partnerstandarder",
-        foot_news_title: "Dialog", foot_news_text: "Bliv en del af vores private korrespondance for at få dybdegående indsigter i botanisk velvære og lang levetid.", foot_news_btn: "Tilmeld",
-        foot_terms: "Handelsbetingelser", foot_privacy: "Privatlivspolitik"
+        news_label: "Global Indsigt", news_title: "Industriens Udvikling", news_intro: "Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.",
+        news_loading: "Henter seneste journaler...",
+        foot_desc: "Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum.",
+        foot_nav_title: "Udforskning", foot_nav_1: "Vores filosofi", foot_nav_2: "Kollektionen",
+        foot_news_title: "Dialog", foot_news_btn: "Tilmeld", foot_privacy: "Privatlivspolitik"
       }
     };
 
@@ -385,18 +407,25 @@
       currentLang = currentLang === 'da' ? 'en' : 'da';
       document.getElementById('langToggle').innerText = currentLang === 'da' ? 'EN' : 'DA';
       document.getElementById('langToggleMobile').innerText = currentLang === 'da' ? 'EN' : 'DA';
-      
       document.getElementById('emailInput').placeholder = currentLang === 'da' ? 'Din e-mailadresse' : 'Your email address';
       
+      // Update statiske tekster
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[currentLang][key]) {
           el.innerText = translations[currentLang][key];
         }
       });
+      
+      // Update dynamiske "Læs original artikel" tekster i nyhederne
+      document.querySelectorAll('.read-more-text').forEach(el => {
+        el.innerText = el.getAttribute(`data-${currentLang}`);
+      });
     }
 
+    // Start script
     lucide.createIcons();
+    fetchRSSNews();
   </script>
 </body>
 </html>
