@@ -44,12 +44,30 @@
       transform: translateY(0);
       opacity: 1;
     }
+
+    /* Modal Reader View styling */
+    .modal-overlay {
+      transition: opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
+    }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-stone-300 selection:text-stone-900">
 
   <!-- Custom Floating Toast Notification -->
-  <div id="custom-toast" class="fixed bottom-6 right-6 z-50 max-w-sm bg-stone-900 text-stone-100 p-5 shadow-2xl border border-stone-800 flex items-start space-x-4">
+  <div id="custom-toast" class="fixed bottom-6 right-6 z-50 max-w-sm bg-[#1c1c1c] text-stone-100 p-5 shadow-2xl border border-stone-800 flex items-start space-x-4">
     <div class="p-1 bg-stone-800 rounded">
       <i data-lucide="external-link" class="w-4 h-4 text-stone-300"></i>
     </div>
@@ -62,8 +80,42 @@
     </button>
   </div>
 
+  <!-- Interactive Reader View Modal -->
+  <div id="reader-modal" class="modal-overlay fixed inset-0 z-50 overflow-y-auto bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="modal-content bg-[#fcfbf9] max-w-2xl w-full p-8 md:p-14 shadow-2xl border border-stone-200 relative max-h-[90vh] overflow-y-auto flex flex-col">
+      <button onclick="closeReader()" class="absolute top-6 right-6 text-stone-500 hover:text-stone-900 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="mb-6">
+        <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-3 flex justify-between items-center pr-8">
+          <span id="modal-date">Marts 2026</span>
+          <span class="text-stone-500 font-semibold" id="modal-category">Kognition</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl serif font-medium text-stone-900 leading-tight" id="modal-title">Artiklens titel indlæses...</h2>
+      </div>
+
+      <!-- Main Brødtekst -->
+      <div class="prose text-stone-600 font-light text-sm md:text-base leading-relaxed space-y-6 mb-12 border-b border-stone-200 pb-10" id="modal-body">
+        <!-- Paragraffer indlæses dynamisk -->
+      </div>
+
+      <!-- Contextual Affiliate Box -->
+      <div id="modal-affiliate-box" class="bg-stone-100 p-6 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="max-w-sm">
+          <span class="text-[9px] uppercase tracking-[0.2em] text-stone-400 block mb-2" data-i18n="modal_rec_label">Anbefalet formulering</span>
+          <h4 class="text-lg serif font-medium text-stone-900 mb-2" id="rec-product-title">Restorativt søvnkompleks</h4>
+          <p class="text-xs text-stone-500 font-light leading-relaxed" id="rec-product-desc">Formuleret til at genskabe kroppens naturlige balance og ro.</p>
+        </div>
+        <button id="rec-product-btn" class="px-6 py-3 bg-[#1c1c1c] text-[#fcfbf9] text-[10px] uppercase tracking-widest hover:bg-stone-700 transition-colors shrink-0" onclick="">
+          Erhverv via partner
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Navigation -->
-  <nav class="fixed w-full top-0 z-50 bg-[#fcfbf9]/80 backdrop-blur-lg border-b border-stone-200 transition-all duration-300">
+  <nav class="fixed w-full top-0 z-40 bg-[#fcfbf9]/80 backdrop-blur-lg border-b border-stone-200 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="hidden md:block text-xs uppercase tracking-widest text-stone-500 w-1/3" data-i18n="nav_curation">
         Uafhængig kuratering
@@ -260,7 +312,7 @@
           <div class="text-[10px] uppercase tracking-[0.2em] text-stone-500 mb-4" data-i18n="news_label">Global indsigt</div>
           <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="news_title">Industriens udvikling</h2>
           <p class="text-stone-600 font-light leading-relaxed text-sm md:text-base" data-i18n="news_intro">
-            Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning.
+            Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud.
           </p>
         </div>
       </div>
@@ -312,6 +364,9 @@
   </footer>
 
   <script>
+    // Global hukommelse til hentede artikler
+    let loadedArticles = [];
+
     // --- PARTNER REDIRECT TOAST LOGIC ---
     function showPartnerToast(partnerName, productName) {
       const toast = document.getElementById('custom-toast');
@@ -334,6 +389,82 @@
       document.getElementById('custom-toast').classList.remove('show');
     }
 
+    // --- INTERACTIVE READER VIEW MODAL ---
+    function openReader(index) {
+      const article = loadedArticles[index];
+      if (!article) return;
+
+      const modal = document.getElementById('reader-modal');
+      const dateEl = document.getElementById('modal-date');
+      const catEl = document.getElementById('modal-category');
+      const titleEl = document.getElementById('modal-title');
+      const bodyEl = document.getElementById('modal-body');
+
+      // Indlæs dato og kategori
+      const dateObj = new Date(article.pubDate);
+      dateEl.innerText = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'long', year: 'numeric' });
+      catEl.innerText = article.category || 'Videnskab';
+      titleEl.innerText = article.title;
+
+      // Konverter \n\n i content til smukke afsnit (<p>)
+      bodyEl.innerHTML = '';
+      const textToSplit = article.contentDA || article.excerptDA || '';
+      const paragraphs = textToSplit.split(/\n\n+/);
+      
+      paragraphs.forEach(pText => {
+        if (pText.trim()) {
+          const p = document.createElement('p');
+          p.className = 'leading-relaxed font-light text-stone-700';
+          p.innerText = pText.trim();
+          bodyEl.appendChild(p);
+        }
+      });
+
+      // Opbyg den parrede affiliate-anbefaling i bunden
+      buildAffiliateRecommendation(article.category || 'Generel');
+
+      // Vis modalen med transition
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Forhindr baggrundsscroll
+    }
+
+    function closeReader() {
+      const modal = document.getElementById('reader-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Genaktiver scroll
+    }
+
+    // Luk modal hvis man klikker udenfor papiret
+    document.getElementById('reader-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeReader();
+      }
+    });
+
+    // Intelligent parring af affiliate produkt baseret på artiklens kategori
+    function buildAffiliateRecommendation(category) {
+      const recTitle = document.getElementById('rec-product-title');
+      const recDesc = document.getElementById('rec-product-desc');
+      const recBtn = document.getElementById('rec-product-btn');
+
+      const catLower = category.toLowerCase();
+
+      if (catLower.includes('kognition') || catLower.includes('lovgivning')) {
+        recTitle.innerText = currentLang === 'da' ? "Krystallinsk THCa ekstrakt" : "Crystalline THCa Extract";
+        recDesc.innerText = currentLang === 'da' ? "Målrettet dyb mental afspænding og kognitiv restitution." : "Targeted deep mental relaxation and cognitive recovery.";
+        recBtn.setAttribute('onclick', "showPartnerToast('Vores partner', 'Krystallinsk THCa ekstrakt')");
+      } else if (catLower.includes('søvn') || catLower.includes('industri')) {
+        recTitle.innerText = currentLang === 'da' ? "Restorativt søvnkompleks" : "Restorative Sleep Complex";
+        recDesc.innerText = currentLang === 'da' ? "Uden THC, beriget med beroligende naturlige botaniske ekstrakter." : "Zero THC, enriched with calming organic botanical extracts.";
+        recBtn.setAttribute('onclick', "showPartnerToast('Naturecan', 'Restorativt søvnkompleks')");
+      } else {
+        // Standard (Fysiologi / Biokemi)
+        recTitle.innerText = currentLang === 'da' ? "Fundament-dråberne (15%)" : "The Baseline Drops (15%)";
+        recDesc.innerText = currentLang === 'da' ? "Organisk fuldspektrum hampekstrakt til fysiologisk balance." : "Organic full spectrum hemp extract for daily balance.";
+        recBtn.setAttribute('onclick', "showPartnerToast('Nordic Oil', 'Fundament-dråberne (15%)')");
+      }
+    }
+
     // --- RSS & AUTOMATION LOGIC ---
     const fallbackArticles = [
       {
@@ -341,8 +472,8 @@
         category: "Lovgivning",
         pubDate: new Date("2026-05-12"),
         link: "https://mjbizdaily.com/",
-        excerptDA: "En gennemgang af den seneste lovgivningsmæssige udvikling og dens indvirkning på det nordiske landskab.",
-        excerptEN: "An in-depth review of the latest regulatory developments and their impact on the Nordic landscape."
+        excerptDA: "En gennemgang af den seneste lovgivningsmæssige udvikling og dens indvirkning på det nordiske marked.",
+        contentDA: "Den tyske liberalisering har skabt rystelser gennem det europæiske sundhedslandskab. Mens den indledende fase primært handlede om besiddelse og personlig dyrkning, retter fase to sig direkte mod kontrollerede kommercielle værdikæder og modelprojekter.\\n\\nFor de nordiske lande repræsenterer den tyske model en guldgrube af empirisk data. Ved at overvåge de fysiologiske og sociale effekter af reguleret salg, kan lande som Danmark og Sverige springe de tidlige børnesygdomme over.\\n\\nVi forventer, at de harmoniserede EU-standarder for produktkvalitet og grænseværdier vil tvinge de nordiske sundhedsstyrelser til at revurdere deres nuværende, stærkt restriktive holdning til terapeutisk cannabinoid-anvendelse inden for de kommende 24 måneder."
       },
       {
         title: "Klinisk studie: biotilgængelighed i liposomale cannabinoid-profileringer",
@@ -350,7 +481,7 @@
         pubDate: new Date("2026-04-28"),
         link: "https://mjbizdaily.com/",
         excerptDA: "Ny biokemisk forskning viser, hvordan transportmolekyler optimerer optagelsen markant.",
-        excerptEN: "New biochemical research shows how lipid carriers optimize physiological absorption rates."
+        contentDA: "Biotilgængelighed har altid været akilleshælen for orale cannabisprodukter. Da cannabinoider er fedtopløselige, går en stor del af molekylerne tabt i mave-tarm-systemet under den såkaldte 'førstepassage-metabolisme'.\\n\\nEt nyt klinisk forsøg kortlægger effekten af liposomale indkapslinger, hvor molekylerne omgives af et mikroskopisk fedtlag (liposomer). Resultaterne er slående: Forsøgsdeltagerne udviste en op til fem gange højere koncentration af aktive stoffer i blodbanen sammenlignet med traditionelle olieekstrakter.\\n\\nDette betyder i praksis, at forbrugeren kan opnå den samme fysiologiske effekt med en markant lavere dosis, hvilket både skåner leveren og reducerer omkostningerne ved daglig administration."
       },
       {
         title: "Den Europæiske Union harmonerer grænseværdier for THCa produkter",
@@ -358,7 +489,7 @@
         pubDate: new Date("2026-04-15"),
         link: "https://mjbizdaily.com/",
         excerptDA: "Standardiserede retningslinjer gør det lettere for nordiske forbrugere at navigere sikkert i markedet.",
-        excerptEN: "Standardized guidelines make it easier for Nordic consumers to navigate the market safely."
+        contentDA: "Europaparlamentet har taget de første skridt mod en fælles standardisering af THCa (tetrahydrocannabinolsyre). Den rå, termisk inaktive precursor til THC har længe befundet sig i en juridisk gråzone, hvilket har hæmmet udbredelsen og skabt usikkerhed.\\n\\nDe nye direktiver fastlægger præcise renhedskrav og testprocedurer for europæiske laboratorier. Dette eliminerer risikoen for, at uautoriserede eller forurenede ekstrakter finder vej til de førende distributionskanaler.\\n\\nFor det modne, kvalitetsbevidste publikum i Norden betyder denne harmonisering en hidtil uset gennemsigtighed. Man kan nu erhverve specialiserede THCa-formuleringer med absolut vished om, at de overholder de strengeste kliniske og juridiske grænseværdier."
       }
     ];
 
@@ -375,15 +506,17 @@
         if (loader) loader.style.display = 'none';
         container.innerHTML = '';
         
-        articles.slice(0, 3).forEach(article => {
+        // Gem globalt
+        loadedArticles = articles;
+        
+        articles.slice(0, 3).forEach((article, index) => {
           const dateObj = new Date(article.pubDate);
           const dateString = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'short', year: 'numeric' });
           const categoryText = article.category || (currentLang === 'da' ? 'Industri' : 'Industry');
           
-          const articleEl = document.createElement('a');
-          articleEl.href = article.link;
-          articleEl.target = '_blank';
-          articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
+          const articleEl = document.createElement('div');
+          articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col cursor-pointer';
+          articleEl.setAttribute('onclick', `openReader(${index})`);
           
           articleEl.innerHTML = `
             <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4 flex justify-between">
@@ -393,8 +526,8 @@
             <h3 class="text-xl serif text-stone-900 mb-4 leading-snug">${article.title}</h3>
             <p class="text-stone-500 font-light text-xs mb-6 leading-relaxed">${article.excerptDA}</p>
             <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
-              <span class="read-more-text" data-da="Læs original artikel" data-en="Read original article">${currentLang === 'da' ? 'Læs original artikel' : 'Read original article'}</span>
-              <i data-lucide="external-link" class="w-3 h-3"></i>
+              <span class="read-more-text" data-da="Læs redaktionel optegnelse" data-en="Read editorial record">${currentLang === 'da' ? 'Læs redaktionel optegnelse' : 'Read editorial record'}</span>
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
             </div>
           `;
           container.appendChild(articleEl);
@@ -412,17 +545,18 @@
       if (loader) loader.style.display = 'none';
       container.innerHTML = '';
 
-      fallbackArticles.forEach(article => {
+      loadedArticles = fallbackArticles;
+
+      fallbackArticles.forEach((article, index) => {
         const dateObj = new Date(article.pubDate);
         const dateString = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'short', year: 'numeric' });
         
         const titleText = currentLang === 'da' ? article.title : "The Cannabinoid Landscape: Scientific Advancements 2026";
-        const excerptText = currentLang === 'da' ? article.excerptDA : article.excerptEN;
+        const excerptText = currentLang === 'da' ? article.excerptDA : "A review of the latest scientific and biochemical developments in the cannabinoid market.";
 
-        const articleEl = document.createElement('a');
-        articleEl.href = article.link;
-        articleEl.target = '_blank';
-        articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
+        const articleEl = document.createElement('div');
+        articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col cursor-pointer';
+        articleEl.setAttribute('onclick', `openReader(${index})`);
         
         articleEl.innerHTML = `
           <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4 flex justify-between">
@@ -433,7 +567,7 @@
           <p class="text-stone-500 font-light text-xs mb-6 leading-relaxed">${excerptText}</p>
           <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
             <span class="read-more-text" data-da="Udforsk indsigt" data-en="Explore insight">${currentLang === 'da' ? 'Udforsk indsigt' : 'Explore insight'}</span>
-            <i data-lucide="external-link" class="w-3 h-3"></i>
+            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
           </div>
         `;
         container.appendChild(articleEl);
@@ -467,7 +601,8 @@
         news_loading: "Retrieving latest journals...",
         foot_desc: "Curators of premium, legal botanical formulations for the discerning Nordic demographic.",
         foot_nav_title: "Exploration", foot_nav_1: "Our Philosophy", foot_nav_2: "Collection",
-        foot_news_title: "Dialogue", foot_news_btn: "Join", foot_privacy: "Privacy Policy"
+        foot_news_title: "Dialogue", foot_news_btn: "Join", foot_privacy: "Privacy Policy",
+        modal_rec_label: "Recommended formulation"
       },
       da: {
         nav_curation: "Uafhængig kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer", nav_news: "Udvikling",
@@ -479,21 +614,22 @@
         phil_text: "For det tænkende menneske er velvære ikke længere en overfladisk trend; det er en fortløbende, seriøs dialog mellem krop og sind. Vi betragter hele plantens spektrum – ikke kun isolerede molekyler. Vi fungerer som dit stringente filter og vurderer uafhængigt europæiske producenter for at sikre, at de ekstrakter du byder din krop, er af absolut særklasse.",
         phil_mantra: "Kontekst over hype. Effekt over markedsføring.",
         col_title: "Den kuraterede kollektion",
-        col_text: "Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model. Fra grundlæggende CBD til avancerede THCa-profiler.",
+        col_text: "Vores nøje udvalgte partnerprodukter. Weeds.dk opererer ud fra en transparent affiliate-model. Fra grundlæggende CBD til avancerede THCa-profiler.",
         prod_type_1: "Fuldspektrum CBD", prod_title_1: "Fundament-dråberne (15%)", prod_desc_1: "Et robust, økologisk hampekstrakt designet til daglig fysiologisk ligevægt. Ideelt til at etablere et konsistent indre fundament.",
         prod_type_2: "Bredspektrum CBD", prod_title_2: "Restorativt søvnkompleks", prod_desc_2: "Formuleret uden THC og beriget med vitale botaniske ekstrakter for at understøtte den dybe, ubrudte søvnarkitektur.",
-        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.",
+        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor to THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.",
         btn_acquire: "Erhverv via partner",
         fut_label: "I horisonten", fut_title: "Botanisk gastronomi og drikkevarer", fut_text: "I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.",
         exp_title: "Empiri og opdagelser", exp_intro: "Vi insisterer på at koble den kliniske litteratur med den levede erfaring.",
         exp_tag_1: "Kognition", exp_post_1_title: "At sænke den indre støj", exp_post_1_excerpt: "En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration.",
         exp_tag_2: "Fysiologi", exp_post_2_title: "Spektrum og synergi", exp_post_2_excerpt: "Mine observationer af \"Entourage-effekten\" og overgangen fra isolat til fuldspektrum.",
         exp_read_more: "Læs optegnelse",
-        news_label: "Global indsigt", news_title: "Industriens udvikling", news_intro: "Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.",
+        news_label: "Global indsigt", news_title: "Industriens udvikling", news_intro: "Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning.",
         news_loading: "Henter seneste journaler...",
         foot_desc: "Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum.",
         foot_nav_title: "Udforskning", foot_nav_1: "Vores filosofi", foot_nav_2: "Kollektionen",
-        foot_news_title: "Dialog", foot_news_btn: "Tilmeld", foot_privacy: "Privatlivspolitik"
+        foot_news_title: "Dialog", foot_news_btn: "Tilmeld", foot_privacy: "Privatlivspolitik",
+        modal_rec_label: "Anbefalet formulering"
       }
     };
 
