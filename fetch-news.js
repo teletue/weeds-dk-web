@@ -69,10 +69,10 @@ async function processWithGemini(article) {
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': GEMINI_API_KEY },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: { responseMimeType: "application/json" }
@@ -81,6 +81,9 @@ async function processWithGemini(article) {
     );
 
     const data = await response.json();
+    if (data.error) {
+      throw new Error(`Gemini API fejl: ${data.error.message}`);
+    }
     if (!data.candidates || data.candidates.length === 0) {
       throw new Error("Intet svar modtaget fra Gemini API.");
     }
@@ -97,7 +100,9 @@ async function main() {
   console.log("Starter synkronisering af nyheder for weeds.dk...");
   
   try {
-    const rssResponse = await fetch(RSS_FEED_URL);
+    const rssResponse = await fetch(RSS_FEED_URL, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; WeedsDKBot/1.0; +https://weeds.dk)' }
+    });
     const xmlText = await rssResponse.text();
     const rawArticles = parseRSS(xmlText);
     
