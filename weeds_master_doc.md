@@ -10,11 +10,13 @@ Domæne: weeds.dk
 
 Koncept: En uafhængig, luksuriøs og klinisk funderet kurator af lovlige cannabinoider via en affiliate-forretningsmodel.
 
-Sortiment: Udviklet fra udelukkende CBD til nu at omfatte hele plantens spektrum, herunder THCa, med en forberedt infrastruktur til fremtidens THC-holdige botaniske gastronomi og drikkevarer.
+Sortiment: Udviklet fra udelukkende CBD to nu at omfatte hele plantens spektrum, herunder THCa, med en forberedt infrastruktur til fremtidens THC-holdige botaniske gastronomi og drikkevarer.
 
 Målgruppe: 35-65-årige mænd og kvinder i Norden. Et modent publikum, der søger kognitiv klarhed, bedre søvn og fysiologisk restitution.
 
 Tone of Voice: Rolig, intellektuel, ærlig og kompromisløs. Vi navigerer udenom "stoner"-kultur og aggressiv wellness-marketing. Vi "erhverver" i stedet for at "købe".
+
+Brand Identity (Logo): Minimalistisk, konsekvent lowercase weeds.dk i mørke, dæmpede naturtoner for et eksklusivt, print-agtigt magasin-look.
 
 2. Den Tekniske Stack & SEO
 
@@ -22,11 +24,15 @@ Arkitektur: Statisk Single Page Application (SPA). Bygget for maksimal hastighed
 
 Sprog/Framework: Ren HTML5, Vanilla JavaScript, Tailwind CSS (via CDN). INGEN tunge frameworks (React/Next.js).
 
-Sprogmotor (i18n): Et custom, letvægts JavaScript-dictionary (translations-objektet) i bunden af index.html. Skifter sprog via data-i18n attributter uden reload.
+Sprogmotor (i18n): Et custom, letvægts JavaScript-dictionary (translations-objektet) i bunden af index.html. Skifter sprog via data-i18n attributter uden reload. Standardiseret på dansk (da) og engelsk (en).
 
 Dynamisk Data (RSS): Live nyheder hentes via JavaScript Fetch API, og konverteres gennem rss2json for at omgå CORS-restriktioner.
 
-SEO Principper: Semantisk HTML, mobil-først design (responsive Tailwind-klasser), hurtig load-tid, og strukturerede overskrifter (H1-H3).
+Robusthed (Fallback): Hvis RSS-API'en er nede, blokeret eller rate-limited, slår nyhedssektionen automatisk over på et fast, redaktionelt "Fallback"-univers af tre godkendte artikler, så siden aldrig fremstår beskadiget eller tom.
+
+Interaktion (Toast Notifications): Al brug af rå browser-alerts (alert()) er bandlyst. I stedet anvendes en custom, svævende koksgrå toast-besked, der glider elegant ind på skærmen ved interaktion for at bevare luksusudtrykket.
+
+SEO Principper: Semantisk HTML, mobil-først design (responsive Tailwind-klasser), hurtig load-tid og strukturerede overskrifter (H1-H3).
 
 3. Filer og Mappestruktur
 
@@ -34,9 +40,7 @@ SEO Principper: Semantisk HTML, mobil-først design (responsive Tailwind-klasser
 
 /privacy.html - Privatlivspolitik (GDPR).
 
-/terms.html - [Planlagt] Handelsbetingelser.
-
-/assets/ - Mappen til lokalt hostede, egne AI-genererede billeder (f.eks. cbd-drops.jpg, thca-crystals.jpg). Billeder bør holdes under 300kb for performance.
+/assets/ - Mappen til lokalt hostede, egne AI-genererede billeder (f.eks. cbd-drops.jpg, thca-crystals.jpg, gastronomy.jpg). Billeder skal komprimeres (WebP/JPG) og holdes under 300kb for maksimal ydeevne.
 
 4. Design & Æstetik (The Caniggma Look)
 

@@ -32,11 +32,9 @@
     .bg-dark-olive { background-color: #262b24; }
     img { transition: opacity 0.5s ease-in-out; }
     
-    /* Nyheds-kort og interaktive elementer hover effekter */
     .news-card { transition: all 0.4s ease; }
     .news-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
     
-    /* Elegant Custom Toast/Notification style */
     #custom-toast {
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       transform: translateY(100px);
@@ -50,13 +48,13 @@
 </head>
 <body class="antialiased selection:bg-stone-300 selection:text-stone-900">
 
-  <!-- Custom Floating Toast Notification (Replaces ugly browser alerts) -->
+  <!-- Custom Floating Toast Notification -->
   <div id="custom-toast" class="fixed bottom-6 right-6 z-50 max-w-sm bg-stone-900 text-stone-100 p-5 shadow-2xl border border-stone-800 flex items-start space-x-4">
     <div class="p-1 bg-stone-800 rounded">
       <i data-lucide="external-link" class="w-4 h-4 text-stone-300"></i>
     </div>
     <div class="flex-grow">
-      <h4 class="text-xs font-semibold uppercase tracking-widest text-stone-200 mb-1" id="toast-title">Partner Redirect</h4>
+      <h4 class="text-xs font-semibold uppercase tracking-widest text-stone-200 mb-1" id="toast-title">Erhvervelse</h4>
       <p class="text-xs text-stone-400 font-light leading-relaxed" id="toast-message">Viderestiller til partner...</p>
     </div>
     <button onclick="hideToast()" class="text-stone-500 hover:text-stone-300 transition-colors">
@@ -68,7 +66,7 @@
   <nav class="fixed w-full top-0 z-50 bg-[#fcfbf9]/80 backdrop-blur-lg border-b border-stone-200 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="hidden md:block text-xs uppercase tracking-widest text-stone-500 w-1/3" data-i18n="nav_curation">
-        Uafhængig Kuratering
+        Uafhængig kuratering
       </div>
       <div class="text-2xl serif font-medium tracking-tighter text-center w-full md:w-1/3 lowercase">
         weeds.dk
@@ -91,7 +89,7 @@
   <!-- Hero Section -->
   <section class="pt-40 pb-24 px-6 md:pt-56 md:pb-32 max-w-7xl mx-auto flex flex-col items-center text-center">
     <span class="text-xs tracking-widest uppercase text-stone-500 mb-8 fade-in" data-i18n="hero_subtitle">Et nyt paradigme inden for nordisk velvære</span>
-    <h1 class="text-5xl md:text-7xl serif font-medium leading-[1.1] max-w-4xl mb-10 fade-in delay-1 text-stone-900 animate-slide-up" data-i18n="hero_title">
+    <h1 class="text-5xl md:text-7xl serif font-medium leading-[1.1] max-w-4xl mb-10 fade-in delay-1 text-stone-900" data-i18n="hero_title">
       Kalibrer dit fundament med kompromisløs botanisk renhed.
     </h1>
     <p class="text-lg md:text-xl text-stone-600 max-w-2xl mb-14 font-light leading-relaxed fade-in delay-2" data-i18n="hero_text">
@@ -135,7 +133,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14">
       
-      <!-- Partner Product 1 (CBD Baseline Drops) -->
+      <!-- Partner Product 1 -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
             <img src="assets/cbd-drops.jpg" onerror="this.src='https://images.unsplash.com/photo-1611078713064-96696dbf5c3c?q=80&w=1000&auto=format&fit=crop'" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Full Spectrum CBD Oil Drop">
@@ -155,7 +153,7 @@
         </button>
       </div>
 
-      <!-- Partner Product 2 (Restorative Sleep Complex) -->
+      <!-- Partner Product 2 -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
             <img src="https://images.unsplash.com/photo-1629363447953-625a6ebaa321?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="Restorative Sleep Complex">
@@ -175,22 +173,22 @@
         </button>
       </div>
 
-      <!-- Partner Product 3 (THCa Crystals) -->
+      <!-- Partner Product 3 -->
       <div class="group flex flex-col">
         <div class="bg-stone-200 aspect-[3/4] mb-8 overflow-hidden relative flex items-center justify-center">
              <img src="assets/thca-crystals.jpg" onerror="this.src='https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=1000&auto=format&fit=crop'" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-1000 ease-out" alt="THCa Extract">
         </div>
         <div class="flex-grow">
             <div class="text-[10px] uppercase tracking-widest text-stone-500 mb-3 flex items-center justify-between">
-              <span>Kurateret Partner</span>
-              <span data-i18n="prod_type_3">THCa Formulering</span>
+              <span>Kurateret partner</span>
+              <span data-i18n="prod_type_3">THCa formulering</span>
             </div>
-            <h3 class="text-2xl serif mb-3 text-stone-900" data-i18n="prod_title_3">Krystallinsk THCa Ekstrakt</h3>
+            <h3 class="text-2xl serif mb-3 text-stone-900" data-i18n="prod_title_3">Krystallinsk THCa ekstrakt</h3>
             <p class="text-stone-600 text-sm font-light mb-8 leading-relaxed" data-i18n="prod_desc_3">
               Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.
             </p>
         </div>
-        <button class="w-full py-4 border border-stone-300 text-stone-900 text-xs uppercase tracking-widest hover:bg-stone-900 hover:text-[#fcfbf9] transition-colors duration-300" onclick="showPartnerToast('Vores Partner', 'Krystallinsk THCa Ekstrakt')" data-i18n="btn_acquire">
+        <button class="w-full py-4 border border-stone-300 text-stone-900 text-xs uppercase tracking-widest hover:bg-stone-900 hover:text-[#fcfbf9] transition-colors duration-300" onclick="showPartnerToast('Vores partner', 'Krystallinsk THCa ekstrakt')" data-i18n="btn_acquire">
           Erhverv via partner
         </button>
       </div>
@@ -198,12 +196,12 @@
     </div>
   </section>
 
-  <!-- Future of Botany Teaser (Gastronomy) -->
+  <!-- Future of Botany Teaser -->
   <section class="py-0 px-6 max-w-7xl mx-auto mb-24 md:mb-32">
     <div class="relative w-full overflow-hidden bg-stone-900 text-stone-200 flex flex-col md:flex-row items-center">
       <div class="w-full md:w-1/2 p-12 md:p-20 z-10 text-center md:text-left">
-        <span class="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-4 block" data-i18n="fut_label">I Horisonten</span>
-        <h2 class="text-3xl md:text-4xl serif mb-6" data-i18n="fut_title">Botanisk Gastronomi & Drikkevarer</h2>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-4 block" data-i18n="fut_label">I horisonten</span>
+        <h2 class="text-3xl md:text-4xl serif mb-6" data-i18n="fut_title">Botanisk gastronomi og drikkevarer</h2>
         <p class="font-light text-stone-400 leading-relaxed mb-8 text-sm md:text-base" data-i18n="fut_text">
           I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.
         </p>
@@ -219,7 +217,7 @@
   <!-- Experiences / Empirical Discoveries -->
   <section id="experiences" class="py-24 md:py-32 px-6 bg-[#fcfbf9] border-t border-stone-200">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="exp_title">Empiri & Opdagelser</h2>
+      <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="exp_title">Empiri og opdagelser</h2>
       <p class="text-stone-600 font-light leading-relaxed max-w-2xl mb-16" data-i18n="exp_intro">
         Vi insisterer på at koble den kliniske litteratur med den levede erfaring.
       </p>
@@ -244,7 +242,7 @@
             <span class="w-8 h-px bg-stone-300"></span>
             <span>Februar 2026</span>
           </div>
-          <h3 class="text-2xl serif mb-4 text-stone-900 group-hover:text-stone-600 transition-colors" data-i18n="exp_post_2_title">Spektrum og Synergi</h3>
+          <h3 class="text-2xl serif mb-4 text-stone-900 group-hover:text-stone-600 transition-colors" data-i18n="exp_post_2_title">Spektrum og synergi</h3>
           <p class="text-stone-600 font-light text-sm mb-6" data-i18n="exp_post_2_excerpt">
             Mine observationer af "Entourage-effekten" og overgangen fra isolat til fuldspektrum.
           </p>
@@ -254,22 +252,21 @@
     </div>
   </section>
 
-  <!-- RSS News Section (Industriens Udvikling) -->
+  <!-- RSS News Section -->
   <section id="news" class="py-24 md:py-32 px-6 bg-stone-100 border-t border-stone-200">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-end mb-16">
         <div class="max-w-2xl">
-          <div class="text-[10px] uppercase tracking-[0.2em] text-stone-500 mb-4" data-i18n="news_label">Global Indsigt</div>
-          <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="news_title">Industriens Udvikling</h2>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-stone-500 mb-4" data-i18n="news_label">Global indsigt</div>
+          <h2 class="text-4xl serif mb-6 text-stone-900" data-i18n="news_title">Industriens udvikling</h2>
           <p class="text-stone-600 font-light leading-relaxed text-sm md:text-base" data-i18n="news_intro">
-            Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.
+            Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning.
           </p>
         </div>
       </div>
 
       <!-- Container for RSS Feed and Fallback Redactorals -->
       <div id="rss-feed-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Loader during network request -->
         <div class="col-span-3 text-center py-10 text-stone-500 text-sm font-light uppercase tracking-widest animate-pulse" id="rss-loader" data-i18n="news_loading">
           Henter seneste journaler...
         </div>
@@ -314,7 +311,6 @@
     </div>
   </footer>
 
-  <!-- Scripts: Translation, Icons & RSS Feed Logic -->
   <script>
     // --- PARTNER REDIRECT TOAST LOGIC ---
     function showPartnerToast(partnerName, productName) {
@@ -331,37 +327,34 @@
       msg.innerText = bodyText;
       
       toast.classList.add('show');
-      
-      // Auto-hide toast after 5 seconds
-      setTimeout(() => {
-        hideToast();
-      }, 5000);
+      setTimeout(() => { hideToast(); }, 5000);
     }
 
     function hideToast() {
-      const toast = document.getElementById('custom-toast');
-      toast.classList.remove('show');
+      document.getElementById('custom-toast').classList.remove('show');
     }
 
-    // --- RSS FEED LOGIC ---
-    // Fallback static high-quality articles if the network is rate-limited or blocked
+    // --- RSS & AUTOMATION LOGIC ---
     const fallbackArticles = [
       {
-        title: "Tysklands Cannabismarkeds Anden Fase: Hvad Norden Kan Lære",
+        title: "Tysklands cannabismarkeds anden fase: hvad Norden kan lære",
+        category: "Lovgivning",
         pubDate: new Date("2026-05-12"),
         link: "https://mjbizdaily.com/",
         excerptDA: "En gennemgang af den seneste lovgivningsmæssige udvikling og dens indvirkning på det nordiske landskab.",
         excerptEN: "An in-depth review of the latest regulatory developments and their impact on the Nordic landscape."
       },
       {
-        title: "Klinisk Studie: Biotilgængelighed i Liposomale Cannabinoid-Profileringer",
+        title: "Klinisk studie: biotilgængelighed i liposomale cannabinoid-profileringer",
+        category: "Biokemi",
         pubDate: new Date("2026-04-28"),
         link: "https://mjbizdaily.com/",
         excerptDA: "Ny biokemisk forskning viser, hvordan transportmolekyler optimerer optagelsen markant.",
         excerptEN: "New biochemical research shows how lipid carriers optimize physiological absorption rates."
       },
       {
-        title: "Den Europæiske Union Harmonerer Grænseværdier for THCa Produkter",
+        title: "Den Europæiske Union harmonerer grænseværdier for THCa produkter",
+        category: "Lovgivning",
         pubDate: new Date("2026-04-15"),
         link: "https://mjbizdaily.com/",
         excerptDA: "Standardiserede retningslinjer gør det lettere for nordiske forbrugere at navigere sikkert i markedet.",
@@ -369,47 +362,46 @@
       }
     ];
 
-    const rssFeedUrl = 'https://mjbizdaily.com/feed/'; 
-    const rssApiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-
+    // Vi forsøger først at indlæse de færdige, oversatte artikler fra assets/news.json
     async function fetchRSSNews() {
       const container = document.getElementById('rss-feed-container');
       const loader = document.getElementById('rss-loader');
       
       try {
-        const response = await fetch(rssApiUrl);
-        const data = await response.json();
+        const response = await fetch('assets/news.json');
+        if (!response.ok) throw new Error("news.json ikke tilgængelig");
         
-        if (data.status === 'ok') {
-          loader.style.display = 'none';
-          const articles = data.items.slice(0, 3);
+        const articles = await response.json();
+        if (loader) loader.style.display = 'none';
+        container.innerHTML = '';
+        
+        articles.slice(0, 3).forEach(article => {
+          const dateObj = new Date(article.pubDate);
+          const dateString = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'short', year: 'numeric' });
+          const categoryText = article.category || (currentLang === 'da' ? 'Industri' : 'Industry');
           
-          articles.forEach(article => {
-            const dateObj = new Date(article.pubDate);
-            const dateString = dateObj.toLocaleDateString(currentLang === 'da' ? 'da-DK' : 'en-US', { month: 'short', year: 'numeric' });
-            
-            const articleEl = document.createElement('a');
-            articleEl.href = article.link;
-            articleEl.target = '_blank';
-            articleEl.rel = 'noopener noreferrer';
-            articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
-            
-            articleEl.innerHTML = `
-              <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4">${dateString}</div>
-              <h3 class="text-xl serif text-stone-900 mb-4 leading-snug">${article.title}</h3>
-              <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
-                <span class="read-more-text" data-da="Læs original artikel" data-en="Read original article">${currentLang === 'da' ? 'Læs original artikel' : 'Read original article'}</span>
-                <i data-lucide="external-link" class="w-3 h-3"></i>
-              </div>
-            `;
-            container.appendChild(articleEl);
-          });
-          lucide.createIcons();
-        } else {
-          useFallbackNews();
-        }
+          const articleEl = document.createElement('a');
+          articleEl.href = article.link;
+          articleEl.target = '_blank';
+          articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
+          
+          articleEl.innerHTML = `
+            <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4 flex justify-between">
+              <span>${dateString}</span>
+              <span class="text-stone-500 font-semibold">${categoryText}</span>
+            </div>
+            <h3 class="text-xl serif text-stone-900 mb-4 leading-snug">${article.title}</h3>
+            <p class="text-stone-500 font-light text-xs mb-6 leading-relaxed">${article.excerptDA}</p>
+            <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
+              <span class="read-more-text" data-da="Læs original artikel" data-en="Read original article">${currentLang === 'da' ? 'Læs original artikel' : 'Read original article'}</span>
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+            </div>
+          `;
+          container.appendChild(articleEl);
+        });
+        lucide.createIcons();
       } catch (error) {
-        console.warn('CORS or RSS API unavailable, sliding elegant fallback into view.');
+        console.log("news.json mangler eller er ikke klar endnu. Bruger lokal redaktionel fallback.");
         useFallbackNews();
       }
     }
@@ -418,8 +410,6 @@
       const container = document.getElementById('rss-feed-container');
       const loader = document.getElementById('rss-loader');
       if (loader) loader.style.display = 'none';
-      
-      // Clear previous loaders
       container.innerHTML = '';
 
       fallbackArticles.forEach(article => {
@@ -435,7 +425,10 @@
         articleEl.className = 'news-card block bg-white p-8 border border-stone-200 h-full flex flex-col';
         
         articleEl.innerHTML = `
-          <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4">${dateString}</div>
+          <div class="text-[10px] uppercase tracking-widest text-stone-400 mb-4 flex justify-between">
+            <span>${dateString}</span>
+            <span class="text-stone-500 font-semibold">${article.category}</span>
+          </div>
           <h3 class="text-xl serif text-stone-900 mb-3 leading-snug">${titleText}</h3>
           <p class="text-stone-500 font-light text-xs mb-6 leading-relaxed">${excerptText}</p>
           <div class="mt-auto pt-6 flex items-center space-x-2 text-xs tracking-widest uppercase text-stone-900 border-t border-stone-100">
@@ -451,7 +444,7 @@
     // --- TRANSLATION LOGIC ---
     const translations = {
       en: {
-        nav_curation: "Independent Curation", nav_philosophy: "Philosophy", nav_collection: "Collection", nav_experiences: "Experiences", nav_news: "Evolution",
+        nav_curation: "Independent curation", nav_philosophy: "Philosophy", nav_collection: "Collection", nav_experiences: "Experiences", nav_news: "Evolution",
         hero_subtitle: "A New Paradigm in Nordic Wellbeing",
         hero_title: "Recalibrate your baseline with uncompromising botanical purity.",
         hero_text: "We traverse the noise of the wellness industry to present a highly curated portfolio of cannabinoid profiles – from balancing CBD to potent THCa – designed specifically for the nuanced demands of modern life.",
@@ -477,7 +470,7 @@
         foot_news_title: "Dialogue", foot_news_btn: "Join", foot_privacy: "Privacy Policy"
       },
       da: {
-        nav_curation: "Uafhængig Kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer", nav_news: "Udvikling",
+        nav_curation: "Uafhængig kuratering", nav_philosophy: "Filosofi", nav_collection: "Kollektion", nav_experiences: "Erfaringer", nav_news: "Udvikling",
         hero_subtitle: "Et nyt paradigme inden for nordisk velvære",
         hero_title: "Kalibrer dit fundament med kompromisløs botanisk renhed.",
         hero_text: "Vi navigerer gennem støjen i wellness-industrien for at præsentere en skarpt kurateret portefølje af cannabinoid-profiler – fra balancerende CBD til potent THCa – skabt specifikt til det moderne livs nuancerede krav.",
@@ -489,14 +482,14 @@
         col_text: "Vores nøje udvalgte partnerprodukter. Vi opererer ud fra en transparent affiliate-model. Fra grundlæggende CBD til avancerede THCa-profiler.",
         prod_type_1: "Fuldspektrum CBD", prod_title_1: "Fundament-dråberne (15%)", prod_desc_1: "Et robust, økologisk hampekstrakt designet til daglig fysiologisk ligevægt. Ideelt til at etablere et konsistent indre fundament.",
         prod_type_2: "Bredspektrum CBD", prod_title_2: "Restorativt søvnkompleks", prod_desc_2: "Formuleret uden THC og beriget med vitale botaniske ekstrakter for at understøtte den dybe, ubrudte søvnarkitektur.",
-        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa Ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.",
+        prod_type_3: "THCa Formulering", prod_title_3: "Krystallinsk THCa ekstrakt", prod_desc_3: "Den ubearbejdede, syreholdige precursor til THC. Et kraftfuldt molekyle i sin rå, termisk inaktive form, målrettet dyb afspænding.",
         btn_acquire: "Erhverv via partner",
-        fut_label: "I Horisonten", fut_title: "Botanisk Gastronomi & Drikkevarer", fut_text: "I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.",
-        exp_title: "Empiri & Opdagelser", exp_intro: "Vi insisterer på at koble den kliniske litteratur med den levede erfaring.",
+        fut_label: "I horisonten", fut_title: "Botanisk gastronomi og drikkevarer", fut_text: "I takt med at det europæiske landskab modnes, forbereder vi næste kapitel: En eksklusiv kollektion af mikrodoserede, THC-infuserede drikkevarer. Et sofistikeret, alkoholfrit alternativ til kontrolleret nydelse.",
+        exp_title: "Empiri og opdagelser", exp_intro: "Vi insisterer på at koble den kliniske litteratur med den levede erfaring.",
         exp_tag_1: "Kognition", exp_post_1_title: "At sænke den indre støj", exp_post_1_excerpt: "En undersøgelse af, hvordan præcisionsdosering ændrede min evne til at fastholde dyb koncentration.",
-        exp_tag_2: "Fysiologi", exp_post_2_title: "Spektrum og Synergi", exp_post_2_excerpt: "Mine observationer af \"Entourage-effekten\" og overgangen fra isolat til fuldspektrum.",
+        exp_tag_2: "Fysiologi", exp_post_2_title: "Spektrum og synergi", exp_post_2_excerpt: "Mine observationer af \"Entourage-effekten\" og overgangen fra isolat til fuldspektrum.",
         exp_read_more: "Læs optegnelse",
-        news_label: "Global Indsigt", news_title: "Industriens Udvikling", news_intro: "Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.",
+        news_label: "Global indsigt", news_title: "Industriens udvikling", news_intro: "Lovgivning og videnskab bevæger sig hurtigt. Vi overvåger de vigtigste internationale strømninger og kliniske gennembrud inden for cannabinoid-forskning, direkte formidlet her.",
         news_loading: "Henter seneste journaler...",
         foot_desc: "Kuratorer af førsteklasses, lovlige botaniske formuleringer til det kræsne nordiske publikum.",
         foot_nav_title: "Udforskning", foot_nav_1: "Vores filosofi", foot_nav_2: "Kollektionen",
@@ -512,7 +505,6 @@
       document.getElementById('langToggleMobile').innerText = currentLang === 'da' ? 'EN' : 'DA';
       document.getElementById('emailInput').placeholder = currentLang === 'da' ? 'Din e-mailadresse' : 'Your email address';
       
-      // Update standard statiske tekster med data-i18n attributter
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[currentLang][key]) {
@@ -520,26 +512,11 @@
         }
       });
       
-      // Opdater nyheds-fallback tekster hvis vi viser dem
-      document.querySelectorAll('.read-more-text').forEach(el => {
-        el.innerText = el.getAttribute(`data-${currentLang}`);
-      });
-      
-      // Genindlæs RSS sektionen så sproget tilpasser sig
-      const rssLoader = document.getElementById('rss-loader');
-      if (rssLoader && rssLoader.style.display !== 'none') {
-        // do nothing
-      } else {
-        // Redraw current news items based on language
-        const container = document.getElementById('rss-feed-container');
-        // If containing fallbacks, rebuild them
-        if (container.querySelector('p')) {
-          useFallbackNews();
-        }
-      }
+      // Genindlæs nyheder med det nye sprog
+      fetchRSSNews();
     }
 
-    // Start script
+    // Start
     lucide.createIcons();
     fetchRSSNews();
   </script>
