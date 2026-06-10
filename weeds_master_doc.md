@@ -28,7 +28,10 @@ Dynamisk Data & Automatisering: Nyheder genereres i baggrunden af det autonome 5
 
 Reader View (Magasintilstand): Artiklerne indlæses lokalt fra assets/news.json. Når en bruger klikker på et nyhedskort, åbnes artiklen direkte på siden i et luksuriøst, uforstyrret læse-overlay. contentDA-feltet indeholder fuld HTML og splittes i afsnit (<p>-tags). Dette holder på brugeren og forbedrer konverteringen.
 
-Kontekstuel Affiliate-integration: I bunden af hver artikel i Reader View indlæses automatisk en skræddersyet og relevant købsanbefaling baseret på artiklens kategori (f.eks. parres "Kognition" med THCa-ekstrakten, og "Fysiologi" med CBD-dråberne).
+Kontekstuel Affiliate-integration: I bunden af hver artikel i Reader View indlæses automatisk en skræddersyet købsanbefaling baseret på artiklens kategori. Parringen er synkroniseret med Agent 2's kategorier:
+- THCA / Lovgivning / Politik → THCa Diamanter (krystallinsk ekstrakt)
+- Kultur / Industriel Hamp / Virksomheder → Gastronomisk THCa mocktail
+- Forskning / CBD / Medicinsk Cannabis / Marked → CBD Fundament-dråber (standard)
 
 Design-principper: Varm sten/knækket hvid (bg-[#fcfbf9]), dyb oliven (bg-[#262b24]), carbon-sort (text-[#1c1c1c]). Playfair Display (Serif) til overskrifter, Inter (Sans-serif) til brødtekst.
 
@@ -97,6 +100,11 @@ READER VIEW HTML FORMATERING ✅ LØST (10.06.2026)
 - Problem: contentDA feltet indeholdt HTML (<h1>, <h2>, <p>), men vistes som ren tekst
 - Løsning: openReader() tjekker nu for HTML tags med regex. Hvis HTML findes, bruges innerHTML direkte. Hvis rå tekst (gamle artikler), beholdes split-logikken.
 - Status: AI-genererede artikler vises nu korrekt med formaterede overskrifter og afsnit
+
+AFFILIATE KATEGORI PARRING ✅ LØST (10.06.2026)
+- Problem: buildAffiliateRecommendation() tjekkede for 'kognition', 'søvn', 'industri' som Agent 2 aldrig genererer
+- Løsning: Synkroniseret med Agent 2's 10 kategorier (THCA, Lovgivning, Politik, Forskning, CBD, Medicinsk Cannabis, Marked, Industriel Hamp, Virksomheder, Kultur)
+- Status: Korrekt produktparring nu: THCA/Lovgivning/Politik → THCa, Kultur/Industriel Hamp → Gastronomi, resten → CBD
 
 6. Deployment Arbejdsgang (Den Gyldne Rutine)
 

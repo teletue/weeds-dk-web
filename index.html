@@ -460,25 +460,36 @@
     });
 
     // Intelligent parring af affiliate produkt baseret på artiklens kategori
+    // SYNKRONISERET MED AGENT 2 KATEGORIER: Lovgivning, THCA, CBD, Medicinsk Cannabis, Marked, Forskning, Politik, Industriel Hamp, Virksomheder, Kultur
     function buildAffiliateRecommendation(category) {
       const recTitle = document.getElementById('rec-product-title');
       const recDesc = document.getElementById('rec-product-desc');
       const recBtn = document.getElementById('rec-product-btn');
 
-      const catLower = category.toLowerCase();
+      const catLower = (category || '').toLowerCase();
 
-      if (catLower.includes('kognition') || catLower.includes('lovgivning')) {
+      // 1. THCA / Lovgivning / Politik -> Parres med THCa Diamanter (kognitiv/kontemplativ kategori)
+      if (catLower.includes('thca') || catLower.includes('lovgivning') || catLower.includes('politik')) {
         recTitle.innerText = currentLang === 'da' ? "Krystallinsk THCa ekstrakt" : "Crystalline THCa Extract";
-        recDesc.innerText = currentLang === 'da' ? "Målrettet dyb mental afspænding og kognitiv restitution." : "Targeted deep mental relaxation and cognitive recovery.";
+        recDesc.innerText = currentLang === 'da' 
+          ? "Målrettet dyb mental afspænding og kognitiv restitution uden sløvhed." 
+          : "Targeted deep mental relaxation and cognitive recovery without drowsiness.";
         recBtn.setAttribute('onclick', "showPartnerToast('Vores partner', 'Krystallinsk THCa ekstrakt')");
-      } else if (catLower.includes('søvn') || catLower.includes('industri')) {
-        recTitle.innerText = currentLang === 'da' ? "Restorativt søvnkompleks" : "Restorative Sleep Complex";
-        recDesc.innerText = currentLang === 'da' ? "Uden THC, beriget med beroligende naturlige botaniske ekstrakter." : "Zero THC, enriched with calming organic botanical extracts.";
-        recBtn.setAttribute('onclick', "showPartnerToast('Naturecan', 'Restorativt søvnkompleks')");
-      } else {
-        // Standard (Fysiologi / Biokemi)
+      } 
+      // 2. Kultur / Industriel Hamp -> Parres med Gastronomi (THCa mocktail)
+      else if (catLower.includes('kultur') || catLower.includes('industriel hamp') || catLower.includes('virksomheder')) {
+        recTitle.innerText = currentLang === 'da' ? "Gastronomisk THCa mocktail-baseret ekstrakt" : "Gastronomic THCa mocktail-based extract";
+        recDesc.innerText = currentLang === 'da' 
+          ? "En subtil, sofistikeret profil til gastronomisk eksperimentering og velvære-ritualer." 
+          : "A subtle, sophisticated profile for gastronomic experimentation and wellness rituals.";
+        recBtn.setAttribute('onclick', "showPartnerToast('Vores partner', 'Gastronomisk THCa ekstrakt')");
+      } 
+      // 3. Forskning / CBD / Medicinsk Cannabis / Marked -> Parres med CBD-olie (standard)
+      else {
         recTitle.innerText = currentLang === 'da' ? "Fundament-dråberne (15%)" : "The Baseline Drops (15%)";
-        recDesc.innerText = currentLang === 'da' ? "Organisk fuldspektrum hampekstrakt til fysiologisk balance." : "Organic full spectrum hemp extract for daily balance.";
+        recDesc.innerText = currentLang === 'da' 
+          ? "Organisk fuldspektrum hampekstrakt til daglig fysiologisk og indre balance." 
+          : "Organic full spectrum hemp extract for daily physiological and inner balance.";
         recBtn.setAttribute('onclick', "showPartnerToast('Nordic Oil', 'Fundament-dråberne (15%)')");
       }
     }
