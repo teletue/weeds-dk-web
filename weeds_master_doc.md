@@ -90,11 +90,10 @@ GOOGLE ANALYTICS (10.06.2026)
 - Indsat i <head> på index.html
 - Status: ✅ Live og modtager data
 
-READER VIEW HTML FORMATERING (10.06.2026)
-- Problem: contentDA feltet indeholder HTML (<h1>, <h2>, <p>), men vises som ren tekst i Reader View overlay
-- Årsag: openReader() funktionen bruger sandsynligvis textContent i stedet for innerHTML
-- Fix: Ret index.html linje ~560-590, skift fra textContent til innerHTML, eller split på \n og wrap i <p> tags
-- Prioritet: Medium – artikler er læsbare men ikke optimalt formateret
+READER VIEW HTML FORMATERING ✅ LØST (10.06.2026)
+- Problem: contentDA feltet indeholdt HTML (<h1>, <h2>, <p>), men vistes som ren tekst
+- Løsning: openReader() tjekker nu for HTML tags med regex. Hvis HTML findes, bruges innerHTML direkte. Hvis rå tekst (gamle artikler), beholdes split-logikken.
+- Status: AI-genererede artikler vises nu korrekt med formaterede overskrifter og afsnit
 
 6. Deployment Arbejdsgang (Den Gyldne Rutine)
 

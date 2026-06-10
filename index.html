@@ -415,19 +415,28 @@
       catEl.innerText = article.category || 'Videnskab';
       titleEl.innerText = article.title;
 
-      // Konverter \n\n i content til smukke afsnit (<p>)
+      // Håndter content - HTML eller rå tekst
       bodyEl.innerHTML = '';
-      const textToSplit = article.contentDA || article.excerptDA || '';
-      const paragraphs = textToSplit.split(/\n\n+/);
-      
-      paragraphs.forEach(pText => {
-        if (pText.trim()) {
-          const p = document.createElement('p');
-          p.className = 'leading-relaxed font-light text-stone-700';
-          p.innerText = pText.trim();
-          bodyEl.appendChild(p);
-        }
-      });
+      const content = article.contentDA || article.excerptDA || '';
+
+      // Tjek om content indeholder HTML tags (fra nye AI-genererede artikler)
+      const hasHTML = /<[a-z][\s\S]*>/i.test(content);
+
+      if (hasHTML) {
+        // AI-genereret HTML - indsæt direkte
+        bodyEl.innerHTML = content;
+      } else {
+        // Gammel rå tekst - split ved \n\n og wrap i <p>
+        const paragraphs = content.split(/\n\n+/);
+        paragraphs.forEach(pText => {
+          if (pText.trim()) {
+            const p = document.createElement('p');
+            p.className = 'leading-relaxed font-light text-stone-700';
+            p.innerText = pText.trim();
+            bodyEl.appendChild(p);
+          }
+        });
+      }
 
       // Opbyg den parrede affiliate-anbefaling i bunden
       buildAffiliateRecommendation(article.category || 'Generel');
