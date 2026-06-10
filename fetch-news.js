@@ -17,10 +17,65 @@
 const fs   = require('fs');
 const path = require('path');
 
+// ─── Load .env fil ───────────────────────────────────────────────────────────
+function loadEnvFile() {
+  const envPath = path.join(__dirname, '.env');
+  console.log('DEBUG: Læser .env fra: ' + envPath);
+
+  if (fs.existsSync(envPath)) {
+    // Læs filen og fjern eventuel UTF-8 BOM
+    let envContent = fs.readFileSync(envPath, 'utf-8');
+    console.log('DEBUG: Fil læst, længde: ' + envContent.length);
+
+    if (envContent.charCodeAt(0) === 0xFEFF) {
+      envContent = envContent.substring(1);
+      console.log('DEBUG: BOM fjernet');
+    }
+
+    const lines = envContent.split(/\r?\n/);
+    console.log('DEBUG: Antal linjer: ' + lines.length);
+
+    lines.forEach((line, idx) => {
+      const originalLine = line;
+      line = line.trim();
+      if (!line || line.startsWith('#')) return;
+
+      const match = line.match(/^([^=]+)=(.*)$/);
+      if (match) {
+        const key = match[1].trim();
+        const value = match[2].trim();
+        console.log('DEBUG: Linje ' + idx + ': key="' + key + '", value length=' + value.length);
+        if (key === 'GEMINI_API_KEY') {
+          console.log('DEBUG: GEMINI_API_KEY fundet! Value: ' + value.substring(0, 20) + '...');
+        }
+        // ALTID overskriv med værdi fra .env filen
+        process.env[key] = value;
+        console.log('DEBUG: Sat process.env[' + key + '] = ' + value.substring(0, 15) + '...');
+      } else {
+        console.log('DEBUG: Linje ' + idx + ' matchede ikke: ' + originalLine.substring(0, 30));
+      }
+    });
+
+    // Debug: vis om nøglen blev sat
+    if (process.env.GEMINI_API_KEY) {
+      const key = process.env.GEMINI_API_KEY;
+      console.log('.env loaded ✓ (GEMINI_API_KEY sat)');
+      console.log('  Længde: ' + key.length);
+      console.log('  Starter med: ' + key.substring(0, 10) + '...');
+      console.log('  Slutter med: ...' + key.substring(key.length - 5));
+    } else {
+      console.log('.env loaded ✗ (GEMINI_API_KEY IKKE fundet i filen!)');
+    }
+  } else {
+    console.log('.env fil IKKE fundet');
+  }
+}
+loadEnvFile();
+
 // ─── Konfiguration ────────────────────────────────────────────────────────────
 
 const GEMINI_API_KEY  = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL    = 'gemini-2.0-flash';
+const GEMINI_MODEL    = 'gemini-2.5-flash-lite';
 const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 const RSS_FEEDS = [
@@ -32,7 +87,7 @@ const RSS_FEEDS = [
 const INGEST_DIR   = path.join(__dirname, 'ingest');
 const OUTPUT_NEWS  = path.join(__dirname, 'assets', 'news.json');
 const OUTPUT_WP    = path.join(__dirname, 'assets', 'wordpress_ready.json');
-const MAX_NEW      = 3;   // maks nye artikler pr. kørsel
+const MAX_NEW      = 1;   // maks nye artikler pr. kørsel
 const MAX_STORED   = 20;  // maks artikler i news.json
 
 const VALID_CATEGORIES = [
@@ -138,7 +193,7 @@ async function agent1_collect() {
     } catch (err) {
       console.warn('  Advarsel: RSS-feed fejlede: ' + err.message);
     }
-    await sleep(500);
+    await sleep(1000);
   }
 
   // 1b. /ingest/*.txt filer
@@ -457,7 +512,7 @@ async function main() {
     // AGENT 2 — Vurder relevans
     console.log('[AGENT 2 - NEWS EDITOR]');
     const editorial = await agent2_score(article);
-    await sleep(800);
+    await sleep(2000);
 
     if (editorial.score < 7) {
       console.log('  [AFVIST] Score ' + editorial.score + ' < 7 - ikke relevant nok.');
@@ -468,7 +523,7 @@ async function main() {
     // AGENT 3 — Faktakontrol
     console.log('[AGENT 3 - FACT CHECKER]');
     const factCheck = await agent3_factcheck(article);
-    await sleep(800);
+    await sleep(2000);
 
     if (factCheck.status === 'review_required') {
       console.log('  [AFVIST] Faktakontrol: review_required - ' + (factCheck.issues || []).join(', '));
@@ -487,12 +542,12 @@ async function main() {
       rejected++;
       continue;
     }
-    await sleep(800);
+    await sleep(2000);
 
     // AGENT 5 — SEO og publiceringsdata
     console.log('[AGENT 5 - SEO EDITOR]');
     const wpEntry = await agent5_seo(article, written, editorial.category, editorial.score);
-    await sleep(800);
+    await sleep(2000);
 
     // news.json entry (Reader View format til index.html)
     const newsEntry = {
