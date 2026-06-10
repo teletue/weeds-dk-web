@@ -75,11 +75,14 @@ MANUEL INGEST (Hampepartiet / webshops / pressemeddelelser)
 3. Kør: node fetch-news.js
 4. Filen slettes automatisk efter vellykket behandling
 
-4. Præcise Billedfilnavne i assets/
+4. Præcise Billedfilnavne i assets/ (VIGTIGT: Brug eksakte filnavne)
 
-Produktkort 1 — CBD olie:        assets/cbd_olie_første billede.png
+Produktkort 1 — CBD olie:        assets/cbd_olie_foerste_billede.png
 Produktkort 2 — THCa diamanter:  assets/thca_diamonds.png
 Produktkort 3 — Gastronomi:      assets/thca_mocktail.png
+
+⚠️ ADVARSEL: Filnavne skal matches præcist (case-sensitive, ingen mellemrum, brug _ og - korrekt).
+Fejl 10.06.2026: "cbd_olie_første billede.png" blev rettet til "cbd_olie_foerste_billede.png" (æ → ae, fjernet mellemrum).
 
 Alle billedfiler har onerror-fallback til Unsplash i index.html.
 
