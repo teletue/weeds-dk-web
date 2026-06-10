@@ -34,7 +34,12 @@ Design-principper: Varm sten/knækket hvid (bg-[#fcfbf9]), dyb oliven (bg-[#262b
 
 3. Det Autonome 5-Agent Redaktionssystem (fetch-news.js)
 
-Kør: $env:GEMINI_API_KEY="din-nøgle"; node fetch-news.js
+Kør: node fetch-news.js
+
+Opsætning (første gang):
+1. Opret .env fil i roden: GEMINI_API_KEY=AQ.din-nøgle-her
+2. .env er automatisk i .gitignore (sikkerhed)
+3. Alternativ: $env:GEMINI_API_KEY="din-nøgle" (midlertidigt)
 
 AGENT 1 — COLLECTOR
 Indsamler fra tre fokuserede Google News RSS-feeds (dansk cannabis-lovgivning, europæisk CBD/THCa, international forskning).
@@ -55,16 +60,14 @@ Omskriver kildematerialet til professionel dansk journalistik i HTML-format (800
 Struktur: H1 + introduktion, 3x H2 + brødtekst, konklusion, kildeliste.
 Overholder redaktionelle principper: neutral, faktabaseret, ikke AI-agtig.
 
-AGENT 5 — SEO EDITOR & PUBLISHER
-Genererer SEO-titel (max 60 tegn), meta-beskrivelse (max 155 tegn), URL-slug, tags og billedprompt.
-Output gemmes i assets/wordpress_ready.json.
+AGENT 5 — SEO EDITOR
+Genererer SEO-titel (max 60 tegn), meta-beskrivelse (max 155 tegn), URL-slug, tags og billedprompt til intern brug.
 
 DUPLIKATKONTROL
 Nye artikler tjekkes mod eksisterende news.json via titelsammenligning (fuzzy match >65% ordlighed afviser).
 
-OUTPUT-FILER
-assets/news.json            — Reader View format til index.html (nye artikler flettet forrest, maks 20 total)
-assets/wordpress_ready.json — Fuld WordPress-klar publiceringsdata inkl. SEO-felter og featured image prompt
+OUTPUT-FIL
+assets/news.json — Reader View format til index.html (nye artikler flettet forrest, maks 20 total, 7 aktuelle)
 
 MANUEL INGEST (Hampepartiet / webshops / pressemeddelelser)
 1. Gem rå tekst som en .txt fil i /ingest/ mappen
@@ -80,7 +83,20 @@ Produktkort 3 — Gastronomi:      assets/thca_mocktail.png
 
 Alle billedfiler har onerror-fallback til Unsplash i index.html.
 
-5. Deployment Arbejdsgang (Den Gyldne Rutine)
+5. Kendte Problemer / Pending Tasks
+
+GOOGLE ANALYTICS (10.06.2026)
+- Tag: G-WEY03MZ34B
+- Indsat i <head> på index.html
+- Status: ✅ Live og modtager data
+
+READER VIEW HTML FORMATERING (10.06.2026)
+- Problem: contentDA feltet indeholder HTML (<h1>, <h2>, <p>), men vises som ren tekst i Reader View overlay
+- Årsag: openReader() funktionen bruger sandsynligvis textContent i stedet for innerHTML
+- Fix: Ret index.html linje ~560-590, skift fra textContent til innerHTML, eller split på \n og wrap i <p> tags
+- Prioritet: Medium – artikler er læsbare men ikke optimalt formateret
+
+6. Deployment Arbejdsgang (Den Gyldne Rutine)
 
 Køres i Windsurf terminalen:
 
